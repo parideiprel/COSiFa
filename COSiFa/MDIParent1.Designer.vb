@@ -70,7 +70,7 @@ Partial Class MDIParent1
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(94, 22)
         Me.ExitToolStripMenuItem.Text = "E&sci"
         '
         'VisualizzaToolStripMenuItem

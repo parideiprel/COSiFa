@@ -13,14 +13,16 @@ Public Class MDIParent1
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
 
-        MsgBox("System.Environment.UserName = " + System.Environment.UserName.ToString + vbCrLf + "System.Environment.UserDomainName = " + System.Environment.UserDomainName.ToString, vbOKOnly)
-        MsgBox("My.Resources.String1 = " + My.Resources.connectionString, vbOKOnly)
+        'MsgBox("System.Environment.UserName = " + System.Environment.UserName.ToString + vbCrLf + "System.Environment.UserDomainName = " + System.Environment.UserDomainName.ToString, vbOKOnly)
+        'MsgBox("My.Resources.String1 = " + My.Resources.connectionString, vbOKOnly)
+        Form1.Show()
 
     End Sub
     Dim userlevel As Integer = 0
     Dim cn As SqlClient.SqlConnection = New SqlClient.SqlConnection(My.Resources.connectionString)
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Inserire qui le attività da fare al caricamento
         'tipo lettura dei diritti utente e abilitazione varie funzioni
 
@@ -31,11 +33,19 @@ Public Class MDIParent1
             Dim sqlReader As SqlDataReader = sqlcmd.ExecuteReader()
             While sqlReader.Read()
                 Debug.Print("******************* " + "{0}", sqlReader(0))
+                userlevel = sqlReader(0)
             End While
             sqlReader.Close()
             cn.Close()
+        Else
+            MsgBox("ERRORE! Impossibile accedre ad database SQL", vbOKOnly & vbCritical, "ERRORE CONNESSIONE")
+            End
         End If
-
+        If userlevel <> 255 Then
+            VisualizzaSituazioneCataloghiToolStripMenuItem.Enabled = False
+            FatturazioneToolStripMenuItem.Enabled = False
+            UtilitàToolStripMenuItem.Enabled = False
+        End If
 
     End Sub
 
