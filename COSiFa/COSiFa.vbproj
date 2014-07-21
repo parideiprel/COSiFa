@@ -150,7 +150,7 @@
       <DependentUpon>MDIParent1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
@@ -195,6 +195,33 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="26990812-icona-salva.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_ico.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_all.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_all1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="application_exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_exit %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_exit %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gnome_media_floppy.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
