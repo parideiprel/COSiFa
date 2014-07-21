@@ -15,10 +15,10 @@ Public Class MDIParent1
 
         'MsgBox("System.Environment.UserName = " + System.Environment.UserName.ToString + vbCrLf + "System.Environment.UserDomainName = " + System.Environment.UserDomainName.ToString, vbOKOnly)
         'MsgBox("My.Resources.String1 = " + My.Resources.connectionString, vbOKOnly)
-        Form1.Show()
+        frmInserimentoOre.Show()
 
     End Sub
-    Dim userlevel As Integer = 0
+    Shared userlevel As Integer = 0
     Dim cn As SqlClient.SqlConnection = New SqlClient.SqlConnection(My.Resources.connectionString)
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class frmInserimentoOre
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
@@ -25,6 +25,9 @@ Partial Class Form1
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -42,6 +45,8 @@ Partial Class Form1
         Me.ColSap = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDisegno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colUtente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDelete = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -81,7 +86,7 @@ Partial Class Form1
         Me.Label2.Location = New System.Drawing.Point(94, 21)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(44, 13)
-        Me.Label2.TabIndex = 3
+        Me.Label2.TabIndex = 0
         Me.Label2.Text = "Prefisso"
         '
         'Label3
@@ -90,7 +95,7 @@ Partial Class Form1
         Me.Label3.Location = New System.Drawing.Point(136, 21)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 4
+        Me.Label3.TabIndex = 0
         Me.Label3.Text = "Numero"
         '
         'Label4
@@ -99,7 +104,7 @@ Partial Class Form1
         Me.Label4.Location = New System.Drawing.Point(245, 21)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(48, 13)
-        Me.Label4.TabIndex = 6
+        Me.Label4.TabIndex = 0
         Me.Label4.Text = "Ore SAP"
         '
         'TextBox3
@@ -120,7 +125,7 @@ Partial Class Form1
         Me.Label5.Location = New System.Drawing.Point(298, 21)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(66, 13)
-        Me.Label5.TabIndex = 8
+        Me.Label5.TabIndex = 0
         Me.Label5.Text = "Ore Disegno"
         '
         'TextBox4
@@ -143,7 +148,7 @@ Partial Class Form1
         Me.Button1.Location = New System.Drawing.Point(403, 26)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(54, 54)
-        Me.Button1.TabIndex = 9
+        Me.Button1.TabIndex = 8
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
@@ -159,18 +164,19 @@ Partial Class Form1
         '
         'DataGridView1
         '
-        Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColPrefisso, Me.ColNumero, Me.ColSap, Me.ColDisegno, Me.colUtente})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 86)
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColPrefisso, Me.ColNumero, Me.ColSap, Me.ColDisegno, Me.colUtente, Me.colDelete})
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 96)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(494, 225)
-        Me.DataGridView1.TabIndex = 11
+        Me.DataGridView1.Size = New System.Drawing.Size(494, 215)
+        Me.DataGridView1.TabIndex = 0
         '
         'ColPrefisso
         '
         Me.ColPrefisso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColPrefisso.DefaultCellStyle = DataGridViewCellStyle1
         Me.ColPrefisso.HeaderText = "Prefisso"
         Me.ColPrefisso.Name = "ColPrefisso"
         Me.ColPrefisso.ReadOnly = True
@@ -179,6 +185,8 @@ Partial Class Form1
         'ColNumero
         '
         Me.ColNumero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColNumero.DefaultCellStyle = DataGridViewCellStyle2
         Me.ColNumero.HeaderText = "Numero"
         Me.ColNumero.Name = "ColNumero"
         Me.ColNumero.ReadOnly = True
@@ -187,9 +195,9 @@ Partial Class Form1
         'ColSap
         '
         Me.ColSap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ColSap.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ColSap.DefaultCellStyle = DataGridViewCellStyle3
         Me.ColSap.HeaderText = "Ore SAP"
         Me.ColSap.Name = "ColSap"
         Me.ColSap.ReadOnly = True
@@ -198,9 +206,9 @@ Partial Class Form1
         'ColDisegno
         '
         Me.ColDisegno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ColDisegno.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ColDisegno.DefaultCellStyle = DataGridViewCellStyle4
         Me.ColDisegno.HeaderText = "Ore Disegno"
         Me.ColDisegno.Name = "ColDisegno"
         Me.ColDisegno.ReadOnly = True
@@ -209,19 +217,45 @@ Partial Class Form1
         'colUtente
         '
         Me.colUtente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.colUtente.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.colUtente.DefaultCellStyle = DataGridViewCellStyle5
+        Me.colUtente.DividerWidth = 15
         Me.colUtente.HeaderText = "Utente"
         Me.colUtente.Name = "colUtente"
         Me.colUtente.ReadOnly = True
-        Me.colUtente.Width = 64
+        Me.colUtente.Width = 79
         '
-        'Form1
+        'colDelete
+        '
+        Me.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.colDelete.DefaultCellStyle = DataGridViewCellStyle6
+        Me.colDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.colDelete.HeaderText = "Elimina"
+        Me.colDelete.Name = "colDelete"
+        Me.colDelete.ReadOnly = True
+        Me.colDelete.Text = "Elimina"
+        Me.colDelete.UseColumnTextForButtonValue = True
+        Me.colDelete.Width = 46
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Yellow
+        Me.Label6.Location = New System.Drawing.Point(245, 67)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(117, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Decimali con il . (punto)"
+        '
+        'frmInserimentoOre
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(518, 383)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -234,7 +268,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "Form1"
+        Me.Name = "frmInserimentoOre"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Inserimento Ore per Catalogo"
@@ -255,9 +289,11 @@ Partial Class Form1
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents ColPrefisso As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColNumero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColSap As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColDisegno As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colUtente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDelete As System.Windows.Forms.DataGridViewButtonColumn
 End Class

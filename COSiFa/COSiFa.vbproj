@@ -96,10 +96,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="tOre.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tOre.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmInserimentoOre.Designer.vb">
+      <DependentUpon>frmInserimentoOre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInserimentoOre.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="tSituazione.designer.vb">
@@ -139,12 +144,20 @@
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.vb</DependentUpon>
     </EmbeddedResource>
+    <None Include="tOre.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>tOre.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="tSituazione.dbml.layout">
       <DependentUpon>tSituazione.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <None Include="tOre.dbml.layout">
+      <DependentUpon>tOre.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="frmInserimentoOre.resx">
+      <DependentUpon>frmInserimentoOre.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.vb</DependentUpon>
