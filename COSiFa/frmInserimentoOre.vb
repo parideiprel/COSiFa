@@ -26,7 +26,7 @@
             'non ho record
             MsgBox("Nessun record estratto")
         End If
-
+        Me.DataGridView1.CurrentCell = DataGridView1.Item(0, Me.DataGridView1.Rows.Count - 2)
         TextBox1.Focus()
     End Sub
 
@@ -67,107 +67,72 @@
             Case Keys.D0 To Keys.D9
                 e.SuppressKeyPress = False
                 If Len(TextBox2.Text) = 2 Then
-                    TextBox3.Focus()
+                    NumericUpDown1.Focus()
+                    bCataOk = True
                 End If
 
             Case Keys.NumPad0 To Keys.NumPad9
                 e.SuppressKeyPress = False
                 If Len(TextBox2.Text) = 2 Then
-                    TextBox3.Focus()
+                    NumericUpDown1.Focus()
                     bCataOk = True
                 End If
 
         End Select
     End Sub
 
-    Private Sub TextBox3_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox3.KeyDown
-
-        Select Case e.KeyCode
-
-            Case Keys.A To Keys.Z
-                e.SuppressKeyPress = True
-
-        End Select
-
-    End Sub
-
-    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
-
-        Select Case e.KeyCode
-
-            Case Keys.A To Keys.Z
-                e.SuppressKeyPress = True
-
-        End Select
-
-
-    End Sub
-
-    Private Sub TextBox3_Leave(sender As Object, e As EventArgs) Handles TextBox3.Leave
-        'Lasciando il controllo, faccio la verifica di coerenza dei dati inseriti
-        'devono essere cifre con 1 decimale
-        Select Case (Len(TextBox3.Text) - InStr(TextBox3.Text, ".", CompareMethod.Text))
-
-            Case 1
-                'dati ok
-                'MsgBox("1")
-            Case Else
-                'dati NOK - msgbox di errore a utente e ritorno del focus al campo
-                MsgBox("Formato dati errato!" + vbCrLf + vbCrLf + "Controllare inserimento.", vbOKOnly, "Errore inserimento dati")
-                TextBox3.SelectAll()
-                TextBox3.Focus()
-        End Select
-
-    End Sub
-
-
-    Private Sub TextBox4_Leave(sender As Object, e As EventArgs) Handles TextBox4.Leave
-        'Lasciando il controllo, faccio la verifica di coerenza dei dati inseriti
-        'devono essere cifre con 1 decimale
-        Select Case (Len(TextBox4.Text) - InStr(TextBox4.Text, ".", CompareMethod.Text))
-
-            Case 1
-                'dati ok
-                'MsgBox("1")
-                bOreOk = True
-                If (bCataOk And bOreOk) = True Then
-                    Button1.Enabled = True
-                    Button1.Focus()
-                End If
-            Case Else
-                'dati NOK - msgbox di errore a utente e ritorno del focus al campo
-                MsgBox("Formato dati errato!" + vbCrLf + vbCrLf + "Controllare inserimento.", vbOKOnly, "Errore inserimento dati")
-                TextBox4.SelectAll()
-                TextBox4.Focus()
-        End Select
-
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim bSave As Boolean = False
+        'verifico che i campi siano tutti compilati
+        If NumericUpDown1.Value <> 0 Then
+            If NumericUpDown2.Value = 0 Then
+                Dim x As MsgBoxResult
+                x = MsgBox("Attenzione !!" + vbCrLf + vbCrLf + "Non sono state inserite Ore Disegno." + vbCrLf + vbCrLf + "E' corretto ?", vbYesNo + vbInformation, "Verifica Dati")
+                If x = vbYes Then
+                    bSave = True
+                Else
+                    bSave = False
+                End If
+            End If
+        End If
+
+        If NumericUpDown1.Value = 0 Then
+            If NumericUpDown2.Value <> 0 Then
+                Dim x As MsgBoxResult
+                x = MsgBox("Attenzione !!" + vbCrLf + vbCrLf + "Non sono state inserite Ore Disegno." + vbCrLf + vbCrLf + "E' corretto ?", vbYesNo + vbInformation, "Verifica Dati")
+                If x = vbYes Then
+                    bSave = True
+                Else
+                    bSave = False
+                End If
+            End If
+        End If
+
+
         'Scrivo i dati nel DB e aggiungo la riga al GridView
+        If bSave = True Then
+            'Aggiungo dati al GridView
+            Me.DataGridView1.Rows.Add(TextBox1.Text, TextBox2.Text, NumericUpDown1.Value, NumericUpDown2.Value, System.Environment.UserName)
 
-        'Aggiungo dati al GridView
-        Me.DataGridView1.Rows.Add(TextBox1.Text, TextBox2.Text, Format(TextBox3.Text, "##.00"), Format(TextBox4.Text, "##.00"), System.Environment.UserName)
+            'Scrivo i dati nel DB SQL
+            Dim tabOre As New tOreDataContext()
+            Dim t As New tOre
 
-        'Scrivo i dati nel DB SQL
-        Dim tabOre As New tOreDataContext()
-        Dim t As New tOre
+            t.Catalogo = TextBox1.Text + TextBox2.Text
+            t.OreSap = NumericUpDown1.Value
+            t.OreDisegno = NumericUpDown2.Value
+            t.Utente = System.Environment.UserName
 
-        t.Catalogo = TextBox1.Text + TextBox2.Text
-        t.OreSap = Val(Format(TextBox3.Text, "##.00"))
-        t.OreDisegno = Val(Format(TextBox4.Text, "##.00"))
-        t.Utente = System.Environment.UserName
-
-        tabOre.tOre.InsertOnSubmit(t)
-        tabOre.SubmitChanges()
-        TextBox1.Text = ""
-        TextBox2.Text = ""
-        TextBox3.Text = ""
-        TextBox4.Text = ""
-        Button1.Enabled = False
-        TextBox1.Focus()
-
+            tabOre.tOre.InsertOnSubmit(t)
+            tabOre.SubmitChanges()
+            TextBox1.Text = ""
+            TextBox2.Text = ""
+            NumericUpDown1.Value = 0
+            NumericUpDown2.Value = 0
+            Button1.Enabled = False
+            TextBox1.Focus()
+        End If
 
     End Sub
 
@@ -191,5 +156,13 @@
             Case Else
                 MsgBox("Non puoi cliccare qui!", vbOKOnly + vbCritical, "ERRORE")
         End Select
+    End Sub
+
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
+        Button1.Enabled = True
+    End Sub
+
+    Private Sub NumericUpDown2_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown2.ValueChanged
+
     End Sub
 End Class
