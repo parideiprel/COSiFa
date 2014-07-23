@@ -7,8 +7,27 @@
 
         Me.MdiParent = MDIParent1
         Button1.Enabled = False
-        TextBox1.Focus()
 
+
+        'carico eventuali dati dal DB relativi alle ore inserite dall'utente
+        Dim tabOre As New tOreDataContext()
+        Dim result = From r In tabOre.tOre Where r.Utente = System.Environment.UserName Select r
+        'Dim result = From r In tabOre.tOre Where r.Utente = "gneppo" Select r
+        'tabOre.tOre.DeleteAllOnSubmit(result)
+        'tabOre.SubmitChanges()
+        If result.Count <> 0 Then
+            'ho record e quindi popolo il datagridview
+            'MsgBox("Trovati n. " + result.Count.ToString + " Record !")
+            'Me.DataGridView1.Rows.Add(TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, System.Environment.UserName)
+            For Each res In result
+                Me.DataGridView1.Rows.Add(res.Catalogo.Substring(0, 1), res.Catalogo.Substring(1, 3), res.OreSap.ToString, res.OreDisegno.ToString, res.Utente)
+            Next
+        Else
+            'non ho record
+            MsgBox("Nessun record estratto")
+        End If
+
+        TextBox1.Focus()
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
@@ -129,24 +148,30 @@
         'Scrivo i dati nel DB e aggiungo la riga al GridView
 
         'Aggiungo dati al GridView
-        Me.DataGridView1.Rows.Add(TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, System.Environment.UserName)
+        Me.DataGridView1.Rows.Add(TextBox1.Text, TextBox2.Text, Format(TextBox3.Text, "##.00"), Format(TextBox4.Text, "##.00"), System.Environment.UserName)
 
         'Scrivo i dati nel DB SQL
         Dim tabOre As New tOreDataContext()
         Dim t As New tOre
 
         t.Catalogo = TextBox1.Text + TextBox2.Text
-        t.OreSap = Val(TextBox3.Text)
-        t.OreDisegno = Val(TextBox4.Text)
+        t.OreSap = Val(Format(TextBox3.Text, "##.00"))
+        t.OreDisegno = Val(Format(TextBox4.Text, "##.00"))
         t.Utente = System.Environment.UserName
 
         tabOre.tOre.InsertOnSubmit(t)
         tabOre.SubmitChanges()
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        Button1.Enabled = False
+        TextBox1.Focus()
 
 
     End Sub
 
-    
+
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         Select Case e.ColumnIndex
             Case 5

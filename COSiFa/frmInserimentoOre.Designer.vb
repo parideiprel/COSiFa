@@ -40,13 +40,14 @@ Partial Class frmInserimentoOre
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.ColPrefisso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColNumero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColSap = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDisegno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colUtente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colDelete = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -166,11 +167,31 @@ Partial Class frmInserimentoOre
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColPrefisso, Me.ColNumero, Me.ColSap, Me.ColDisegno, Me.colUtente, Me.colDelete})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 96)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 125)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(494, 215)
+        Me.DataGridView1.Size = New System.Drawing.Size(494, 186)
         Me.DataGridView1.TabIndex = 0
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Yellow
+        Me.Label6.Location = New System.Drawing.Point(245, 67)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(117, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Decimali con il . (punto)"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(12, 102)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(235, 20)
+        Me.Label7.TabIndex = 11
+        Me.Label7.Text = "Ore inserite per fatturazione"
         '
         'ColPrefisso
         '
@@ -228,33 +249,24 @@ Partial Class frmInserimentoOre
         '
         'colDelete
         '
-        Me.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         Me.colDelete.DefaultCellStyle = DataGridViewCellStyle6
         Me.colDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.colDelete.HeaderText = "Elimina"
+        Me.colDelete.HeaderText = ""
         Me.colDelete.Name = "colDelete"
         Me.colDelete.ReadOnly = True
         Me.colDelete.Text = "Elimina"
         Me.colDelete.UseColumnTextForButtonValue = True
-        Me.colDelete.Width = 46
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Yellow
-        Me.Label6.Location = New System.Drawing.Point(245, 67)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(117, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Decimali con il . (punto)"
+        Me.colDelete.Width = 21
         '
         'frmInserimentoOre
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(518, 383)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button2)
@@ -290,6 +302,7 @@ Partial Class frmInserimentoOre
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents ColPrefisso As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColNumero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColSap As System.Windows.Forms.DataGridViewTextBoxColumn
