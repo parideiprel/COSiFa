@@ -9,6 +9,7 @@
         Button1.Enabled = False
 
 
+
         'carico eventuali dati dal DB relativi alle ore inserite dall'utente
         Dim tabOre As New tOreDataContext()
         Dim result = From r In tabOre.tOre Where r.Utente = System.Environment.UserName Select r
