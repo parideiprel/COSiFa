@@ -138,6 +138,12 @@ Partial Public Class tSituazione
 	
 	Private _NoteAgg As String
 	
+	Private _IsAtm As System.Nullable(Of Boolean)
+	
+	Private _AtmString As String
+	
+	Private _IsStringBefore As System.Nullable(Of Boolean)
+	
 	Public Sub New()
 		MyBase.New
 	End Sub
@@ -564,6 +570,42 @@ Partial Public Class tSituazione
 		Set
 			If (String.Equals(Me._NoteAgg, value) = false) Then
 				Me._NoteAgg = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsAtm", DbType:="Bit")>  _
+	Public Property IsAtm() As System.Nullable(Of Boolean)
+		Get
+			Return Me._IsAtm
+		End Get
+		Set
+			If (Me._IsAtm.Equals(value) = false) Then
+				Me._IsAtm = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AtmString", DbType:="VarChar(15)")>  _
+	Public Property AtmString() As String
+		Get
+			Return Me._AtmString
+		End Get
+		Set
+			If (String.Equals(Me._AtmString, value) = false) Then
+				Me._AtmString = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IsStringBefore", DbType:="Bit")>  _
+	Public Property IsStringBefore() As System.Nullable(Of Boolean)
+		Get
+			Return Me._IsStringBefore
+		End Get
+		Set
+			If (Me._IsStringBefore.Equals(value) = false) Then
+				Me._IsStringBefore = value
 			End If
 		End Set
 	End Property

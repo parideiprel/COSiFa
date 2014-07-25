@@ -23,7 +23,6 @@ Partial Class MDIParent1
     'Non modificarla nell'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MDIParent1))
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -42,12 +41,9 @@ Partial Class MDIParent1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
-        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip
@@ -131,6 +127,7 @@ Partial Class MDIParent1
         '
         'ImportaSituazioneToolStripMenuItem
         '
+        Me.ImportaSituazioneToolStripMenuItem.Enabled = False
         Me.ImportaSituazioneToolStripMenuItem.Name = "ImportaSituazioneToolStripMenuItem"
         Me.ImportaSituazioneToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.ImportaSituazioneToolStripMenuItem.Text = "Importa Situazione"
@@ -166,20 +163,9 @@ Partial Class MDIParent1
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
         '
-        'StatusStrip
+        'OpenFileDialog1
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 559)
-        Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(776, 22)
-        Me.StatusStrip.TabIndex = 7
-        Me.StatusStrip.Text = "StatusStrip"
-        '
-        'ToolStripStatusLabel
-        '
-        Me.ToolStripStatusLabel.Name = "ToolStripStatusLabel"
-        Me.ToolStripStatusLabel.Size = New System.Drawing.Size(34, 17)
-        Me.ToolStripStatusLabel.Text = "Stato"
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'MDIParent1
         '
@@ -188,7 +174,6 @@ Partial Class MDIParent1
         Me.ClientSize = New System.Drawing.Size(776, 581)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MenuStrip)
-        Me.Controls.Add(Me.StatusStrip)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "MDIParent1"
@@ -199,17 +184,12 @@ Partial Class MDIParent1
         Me.MenuStrip.PerformLayout()
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
-        Me.StatusStrip.ResumeLayout(False)
-        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents HelpMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolTip As System.Windows.Forms.ToolTip
-    Friend WithEvents ToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FileMenu As System.Windows.Forms.ToolStripMenuItem
@@ -225,5 +205,6 @@ Partial Class MDIParent1
     Friend WithEvents FatturazioneToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GeneraFileFatturazioneToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GeneraMailFatturazioneToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 
 End Class
