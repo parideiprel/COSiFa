@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports System.Data.SqlClient
+Imports System.Text.RegularExpressions
 
 Public Class MDIParent1
 
@@ -74,6 +75,7 @@ Public Class MDIParent1
         'Definisco le variabili per leggere le colonne dal mio file excel
         Dim xAnno As Integer
         Dim xProduttore As String
+        Dim xEquipment As String
         Dim xSettoreCommerciale As String
         Dim xCanaleDistributivo As String
         Dim xOdV As String
@@ -127,7 +129,72 @@ Public Class MDIParent1
         Dim riga, colonna As Integer
         riga = 2
         colonna = 1
-        xAnno = xlRange.Cells(riga, colonna).value
+        xAnno = xlRange.Cells(riga, 1).value
+        xProduttore = xlRange.Cells(riga, 2).value
+        xEquipment = xlRange.Cells(riga, 3).value
+        xSettoreCommerciale = xlRange.Cells(riga, 4).value
+        xCanaleDistributivo = xlRange.Cells(riga, 5).value
+        xOdV = xlRange.Cells(riga, 6).value
+        xCodiceCliente = xlRange.Cells(riga, 7).value
+        xAnagraficaCliente = xlRange.Cells(riga, 8).value
+        xNazione = xlRange.Cells(riga, 9).value
+        xPosizione = xlRange.Cells(riga, 10).value
+        xCodiceMateriale = xlRange.Cells(riga, 11).value
+        xAnagraficaMateriale = xlRange.Cells(riga, 12).value
+        xSituazioneSpedizione = xlRange.Cells(riga, 13).value
+        xDataSpedizione = xlRange.Cells(riga, 14).value
+        xDtSped1 = xlRange.Cells(riga, 15).value
+        xDtSped2 = xlRange.Cells(riga, 16).value
+        xAutore = xlRange.Cells(riga, 17).value
+        xNote = xlRange.Cells(riga, 18).value
+        xOdA = xlRange.Cells(riga, 19).value
+        xPosizioneOdA = xlRange.Cells(riga, 20).value
+        xCatalogo = xlRange.Cells(riga, 21).value
+        xDataArchiviazione = xlRange.Cells(riga, 22).value
+        xNumeroArchiviazione = xlRange.Cells(riga, 23).value
+        xNumeroArchiviazioneTavole = xlRange.Cells(riga, 24).value
+        xOreSap = xlRange.Cells(riga, 25).value
+        xOreDisegno = xlRange.Cells(riga, 26).value
+        xCostoFatturato = xlRange.Cells(riga, 27).value
+        xCostoPreventivato = xlRange.Cells(riga, 28).value
+        xScostamento = xlRange.Cells(riga, 29).value
+        xNoteAgg = xlRange.Cells(riga, 30).value
+        'le prossime 3 variabili non sono nel file excel ma sono una rielaborazione di dati presenti
+        'necessaria per gestire gli inserimenti manuali di Galli (per gli ATM)
+        'xIsAtm
+        'xAtmString
+        'xIsStringBefore
+
+        If InStr(xEquipment.ToLower, "atm", CompareMethod.Text) <> 0 Then
+            'ho trovato la stringa ATM nel campo xEquipment, quindi è un ATM
+            'setto xIsAtm a true (visto che è un bool)
+            xIsAtm = True
+        Else
+            xIsAtm = False
+        End If
+
+        Dim ResultString As String
+        Try
+            Dim RegexObj As New Regex("[\d]")
+            ResultString = RegexObj.Match(xEquipment).Value
+            Select Case InStr(xEquipment, ResultString)
+                Case Is = 0
+                    'il numero equipment è all'inizio
+                    xAtmString = xEquipment.Substring(8, xEquipment.Length - 1)
+                    xEquipment = ResultString
+                    xIsStringBefore = False
+                Case Is > 0
+                    'il numero è dopo l'inizio stringa
+                    xAtmString = xEquipment.Substring(0, xEquipment.Length - 8)
+                    xEquipment = ResultString
+                    xIsStringBefore = True
+            End Select
+        Catch ex As ArgumentException
+            'Syntax error in the regular expression
+            MsgBox("Stringa non trovata")
+        End Try
+
+
 
         xlFile.Close(False) 'chiude senza salvare
         xlRange = Nothing
