@@ -91,6 +91,11 @@ Public Class MDIParent1
         Dim xDtSped2 As Date
         Dim xAutore As String
         Dim xNote As String
+        Dim xRiferimentoProgramma As String
+        Dim xDataUscita As Date
+        Dim xDataConsegnaPrevista As Date
+        Dim xStudio As String
+        Dim xCdC As String
         Dim xOdA As String
         Dim xPosizioneOdA As Integer
         Dim xCatalogo As String
@@ -126,9 +131,9 @@ Public Class MDIParent1
 
         ' TODO: Occorre fare ciclo per leggere tutti i dati !!!
 
-        Dim riga, colonna As Integer
-        riga = 2
-        colonna = 1
+        Dim riga As Integer
+        riga = 71
+
         xAnno = xlRange.Cells(riga, 1).value
         xProduttore = xlRange.Cells(riga, 2).value
         xEquipment = xlRange.Cells(riga, 3).value
@@ -147,18 +152,23 @@ Public Class MDIParent1
         xDtSped2 = xlRange.Cells(riga, 16).value
         xAutore = xlRange.Cells(riga, 17).value
         xNote = xlRange.Cells(riga, 18).value
-        xOdA = xlRange.Cells(riga, 19).value
-        xPosizioneOdA = xlRange.Cells(riga, 20).value
-        xCatalogo = xlRange.Cells(riga, 21).value
-        xDataArchiviazione = xlRange.Cells(riga, 22).value
-        xNumeroArchiviazione = xlRange.Cells(riga, 23).value
-        xNumeroArchiviazioneTavole = xlRange.Cells(riga, 24).value
-        xOreSap = xlRange.Cells(riga, 25).value
-        xOreDisegno = xlRange.Cells(riga, 26).value
-        xCostoFatturato = xlRange.Cells(riga, 27).value
-        xCostoPreventivato = xlRange.Cells(riga, 28).value
-        xScostamento = xlRange.Cells(riga, 29).value
-        xNoteAgg = xlRange.Cells(riga, 30).value
+        xRiferimentoProgramma = xlRange.Cells(riga, 19).value
+        xDataUscita = xlRange.Cells(riga, 20).value
+        xDataConsegnaPrevista = xlRange.Cells(riga, 21).value
+        xStudio = xlRange.Cells(riga, 22).value
+        xCdC = xlRange.Cells(riga, 23).value
+        xOdA = xlRange.Cells(riga, 24).value
+        xPosizioneOdA = xlRange.Cells(riga, 25).value
+        xCatalogo = xlRange.Cells(riga, 26).value
+        xDataArchiviazione = xlRange.Cells(riga, 27).value
+        xNumeroArchiviazione = xlRange.Cells(riga, 28).value
+        xNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
+        xOreSap = xlRange.Cells(riga, 30).value
+        xOreDisegno = xlRange.Cells(riga, 31).value
+        xCostoFatturato = xlRange.Cells(riga, 32).value
+        xCostoPreventivato = xlRange.Cells(riga, 33).value
+        xScostamento = xlRange.Cells(riga, 34).value
+        xNoteAgg = xlRange.Cells(riga, 35).value
         'le prossime 3 variabili non sono nel file excel ma sono una rielaborazione di dati presenti
         'necessaria per gestire gli inserimenti manuali di Galli (per gli ATM)
         'xIsAtm
@@ -172,28 +182,68 @@ Public Class MDIParent1
         Else
             xIsAtm = False
         End If
+        If xIsAtm Then
+            Dim ResultString As String
+            Try
+                Dim RegexObj As New Regex("[0-9]{8}")
+                ResultString = RegexObj.Match(xEquipment).Value
+                Select Case InStr(xEquipment, ResultString)
+                    Case Is = 0
+                        'il numero equipment è all'inizio
+                        xAtmString = xEquipment.Substring(8, xEquipment.Length - 1)
+                        xEquipment = ResultString
+                        xIsStringBefore = False
+                    Case Is > 0
+                        'il numero è dopo l'inizio stringa
+                        xAtmString = xEquipment.Substring(0, xEquipment.Length - 8)
+                        xEquipment = ResultString
+                        xIsStringBefore = True
+                End Select
+            Catch ex As ArgumentException
+                'Syntax error in the regular expression
+                MsgBox("Stringa non trovata")
+            End Try
+        End If
+        Dim tSitu As tSituazioneDataContext()
+        Dim tSit As New tSituazione
 
-        Dim ResultString As String
-        Try
-            Dim RegexObj As New Regex("[\d]")
-            ResultString = RegexObj.Match(xEquipment).Value
-            Select Case InStr(xEquipment, ResultString)
-                Case Is = 0
-                    'il numero equipment è all'inizio
-                    xAtmString = xEquipment.Substring(8, xEquipment.Length - 1)
-                    xEquipment = ResultString
-                    xIsStringBefore = False
-                Case Is > 0
-                    'il numero è dopo l'inizio stringa
-                    xAtmString = xEquipment.Substring(0, xEquipment.Length - 8)
-                    xEquipment = ResultString
-                    xIsStringBefore = True
-            End Select
-        Catch ex As ArgumentException
-            'Syntax error in the regular expression
-            MsgBox("Stringa non trovata")
-        End Try
+        tSit.Anno = xAnno
+        tSit.Produttore = xProduttore
+        tSit.Equipment = xEquipment
+        tSit.SettoreCommerciale = xSettoreCommerciale
+        tSit.CanaleDistributivo = xCanaleDistributivo
+        tSit.OdV = xOdV
+        tSit.CodiceCliente = xCodiceCliente
+        tSit.AnagraficaCliente = xAnagraficaCliente
+        tSit.Nazione = xNazione
+        tSit.Posizione = xPosizione
+        tSit.CodiceMateriale = xCodiceMateriale
+        tSit.AnagraficaMateriale = xAnagraficaMateriale
+        tSit.SituazioneSpedizione = xSituazioneSpedizione
+        tSit.DataSpedizione = xDataSpedizione
+        tSit.DtSped1 = xDtSped1
+        tSit.DtSped2 = xDtSped2
+        tSit.Autore = xAutore
+        tSit.Note = xNote
+        tSit.RifProgramma = xRiferimentoProgramma
+        tSit.DataUscita = xDataUscita
+        tSit.DataConsegnaPrevista = xDataConsegnaPrevista
+        tSit.Studio = xStudio
+        tSit.CentroDiCosto = xCdC
+        tSit.OdA = xOdA
+        tSit.PosizioneOdA = xPosizioneOdA
+        tSit.Catalogo = xCatalogo
+        tSit.DataArchiviazione = xDataArchiviazione
+        tSit.NumeroArchiviazione = xNumeroArchiviazione
+        tSit.NumeroArchiviazioneTavole = xNumeroArchiviazioneTavole
+        tSit.OreSAP = xOreSap
+        tSit.OreDisegno = xOreDisegno
+        tSit.CostoFatturato = xCostoFatturato
+        tSit.CostoPrevisto = xCostoPreventivato
+        tSit.Scostamento = xScostamento
+        tSit.NoteAgg = xNoteAgg
 
+        'tSitu.tSituazione.InsertOnSubmit(tSit)
 
 
         xlFile.Close(False) 'chiude senza salvare
