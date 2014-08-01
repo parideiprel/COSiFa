@@ -204,7 +204,7 @@ Public Class MDIParent1
                 MsgBox("Stringa non trovata")
             End Try
         End If
-        Dim tSitu As tSituazioneDataContext()
+        Dim tSitu As New tSituazioneDataContext()
         Dim tSit As New tSituazione
 
         tSit.Anno = xAnno
@@ -243,7 +243,7 @@ Public Class MDIParent1
         tSit.Scostamento = xScostamento
         tSit.NoteAgg = xNoteAgg
 
-        'tSitu.tSituazione.InsertOnSubmit(tSit)
+        tSitu.tSituazione.InsertOnSubmit(tSit)
 
 
         xlFile.Close(False) 'chiude senza salvare
