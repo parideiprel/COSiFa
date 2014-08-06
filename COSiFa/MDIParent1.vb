@@ -104,12 +104,12 @@ Public Class MDIParent1
         Dim xNumeroArchiviazioneTavole As String
         Dim xOreSap As Single
         Dim xOreDisegno As Single
-        Dim xCostoFatturato As Single
+        Dim xCostoFatturato As Decimal
         Dim xCostoPreventivato As Single
         Dim xScostamento As Single
         Dim xNoteAgg As String
         Dim xIsAtm As Boolean
-        Dim xAtmString As String
+        Dim xAtmString As String = String.Empty
         Dim xIsStringBefore As Boolean
 
         'ottengo il file da lavorare con un filedialog
@@ -175,6 +175,8 @@ Public Class MDIParent1
         'xAtmString
         'xIsStringBefore
 
+
+
         If InStr(xEquipment.ToLower, "atm", CompareMethod.Text) <> 0 Then
             'ho trovato la stringa ATM nel campo xEquipment, quindi è un ATM
             'setto xIsAtm a true (visto che è un bool)
@@ -206,6 +208,8 @@ Public Class MDIParent1
         End If
         Dim tSitu As New tSituazioneDataContext()
         Dim tSit As New tSituazione
+
+        tSitu.Log = Console.Out
 
         tSit.Anno = xAnno
         tSit.Produttore = xProduttore
@@ -242,9 +246,60 @@ Public Class MDIParent1
         tSit.CostoPrevisto = xCostoPreventivato
         tSit.Scostamento = xScostamento
         tSit.NoteAgg = xNoteAgg
+        'xIsAtm
+        'xAtmString
+        'xIsStringBefore
+        tSit.IsAtm = xIsAtm
+        tSit.AtmString = xAtmString
+        tSit.IsStringBefore = xIsStringBefore
 
         tSitu.tSituazione.InsertOnSubmit(tSit)
 
+        'Console.WriteLine("xAnno: " + Len(xAnno).ToString)
+        'Console.WriteLine("xProduttore: " + Len(xProduttore).ToString)
+        'Console.WriteLine("xEquipment: " + Len(xEquipment).ToString)
+        'Console.WriteLine("xSettoreCommerciale: " + Len(xSettoreCommerciale).ToString)
+        'Console.WriteLine("xCanaleDistributivo: " + Len(xCanaleDistributivo).ToString)
+        'Console.WriteLine("xOdV: " + Len(xOdV).ToString)
+        'Console.WriteLine("xCodiceCliente: " + Len(xCodiceCliente).ToString)
+        'Console.WriteLine("xAnagraficaCliente: " + Len(xAnagraficaCliente).ToString)
+        'Console.WriteLine("xNazione: " + Len(xNazione).ToString)
+        'Console.WriteLine("xPosizione: " + Len(xPosizione).ToString)
+        'Console.WriteLine("xCodiceMateriale: " + Len(xCodiceMateriale).ToString)
+        'Console.WriteLine("xAnagraficaMateriale: " + Len(xAnagraficaMateriale).ToString)
+        'Console.WriteLine("xSituazioneSpedizione: " + Len(xSituazioneSpedizione).ToString)
+        'Console.WriteLine("xDataSpedizione: " + Len(xDataSpedizione).ToString)
+        'Console.WriteLine("xDtSped1: " + Len(xDtSped1).ToString)
+        'Console.WriteLine("xDtSped2: " + Len(xDtSped2).ToString)
+        'Console.WriteLine("xAutore: " + Len(xAutore).ToString)
+        'Console.WriteLine("xNote: " + Len(xNote).ToString)
+        'Console.WriteLine("xRiferimentoProgramma: " + Len(xRiferimentoProgramma).ToString)
+        'Console.WriteLine("xDataUscita: " + Len(xDataUscita).ToString)
+        'Console.WriteLine("xDataConsegnaPrevista: " + Len(xDataConsegnaPrevista).ToString)
+        'Console.WriteLine("xStudio: " + Len(xStudio).ToString)
+        'Console.WriteLine("xCdC: " + Len(xCdC).ToString)
+        'Console.WriteLine("xOdA: " + Len(xOdA).ToString)
+        'Console.WriteLine("xPosizioneOdA: " + Len(xPosizioneOdA).ToString)
+        'Console.WriteLine("xCatalogo: " + Len(xCatalogo).ToString)
+        'Console.WriteLine("xDataArchiviazione: " + Len(xDataArchiviazione).ToString)
+        'Console.WriteLine("xNumeroArchiviazione: " + Len(xNumeroArchiviazione).ToString)
+        'Console.WriteLine("xNumeroArchiviazioneTavole: " + Len(xNumeroArchiviazioneTavole).ToString)
+        'Console.WriteLine("xOreSap: " + Len(xOreSap).ToString)
+        'Console.WriteLine("xOreDisegno: " + Len(xOreDisegno).ToString)
+        'Console.WriteLine("xCostoFatturato: " + Len(xCostoFatturato).ToString)
+        'Console.WriteLine("xCostoPreventivato: " + Len(xCostoPreventivato).ToString)
+        'Console.WriteLine("xScostamento: " + Len(xScostamento).ToString)
+        'Console.WriteLine("xNoteAgg: " + Len(xNoteAgg).ToString)
+        'Console.WriteLine("xIsAtm: " + Len(xIsAtm).ToString)
+        'Console.WriteLine("xAtmString: " + Len(xAtmString).ToString)
+        'Console.WriteLine("xIsStringBefore: " + Len(xIsStringBefore).ToString)
+
+
+        Try
+            tSitu.SubmitChanges()
+        Catch ex As Exception
+            MsgBox("CAZZO UNA ECCEZZIONE !!! LINQ->SQL" + vbCrLf + vbCrLf + ex.Message)
+        End Try
 
         xlFile.Close(False) 'chiude senza salvare
         xlRange = Nothing
@@ -252,6 +307,12 @@ Public Class MDIParent1
         xlFile = Nothing
         xlApp.Quit()
         xlApp = Nothing
-
+        Dim proc As System.Diagnostics.Process() = System.Diagnostics.Process.GetProcessesByName("EXCEL")
+        For Each item In proc
+            item.Kill()
+        Next
     End Sub
+
+  
+
 End Class

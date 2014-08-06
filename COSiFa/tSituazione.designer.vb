@@ -31,6 +31,12 @@ Partial Public Class tSituazioneDataContext
   #Region "Definizioni metodo Extensibility"
   Partial Private Sub OnCreated()
   End Sub
+  Partial Private Sub InserttSituazione(instance As tSituazione)
+    End Sub
+  Partial Private Sub UpdatetSituazione(instance As tSituazione)
+    End Sub
+  Partial Private Sub DeletetSituazione(instance As tSituazione)
+    End Sub
   #End Region
 	
 	Public Sub New()
@@ -67,6 +73,11 @@ End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.tSituazione")>  _
 Partial Public Class tSituazione
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _Id As Integer
 	
 	Private _Anno As Integer
 	
@@ -106,13 +117,13 @@ Partial Public Class tSituazione
 	
 	Private _RifProgramma As String
 	
-	Private _DataUscita As Date
+	Private _DataUscita As System.Nullable(Of Date)
 	
-	Private _DataConsegnaPrevista As Date
+	Private _DataConsegnaPrevista As System.Nullable(Of Date)
 	
 	Private _Studio As String
 	
-	Private _CentroDiCosto As Long
+	Private _CentroDiCosto As String
 	
 	Private _OdA As String
 	
@@ -130,11 +141,11 @@ Partial Public Class tSituazione
 	
 	Private _OreDisegno As System.Nullable(Of Decimal)
 	
-	Private _CostoFatturato As String
+	Private _CostoFatturato As System.Nullable(Of Decimal)
 	
-	Private _CostoPrevisto As String
+	Private _CostoPrevisto As System.Nullable(Of Decimal)
 	
-	Private _Scostamento As String
+	Private _Scostamento As System.Nullable(Of Decimal)
 	
 	Private _NoteAgg As String
 	
@@ -144,9 +155,192 @@ Partial Public Class tSituazione
 	
 	Private _IsStringBefore As System.Nullable(Of Boolean)
 	
+    #Region "Definizioni metodo Extensibility"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIdChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIdChanged()
+    End Sub
+    Partial Private Sub OnAnnoChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnAnnoChanged()
+    End Sub
+    Partial Private Sub OnProduttoreChanging(value As String)
+    End Sub
+    Partial Private Sub OnProduttoreChanged()
+    End Sub
+    Partial Private Sub OnEquipmentChanging(value As String)
+    End Sub
+    Partial Private Sub OnEquipmentChanged()
+    End Sub
+    Partial Private Sub OnSettoreCommercialeChanging(value As String)
+    End Sub
+    Partial Private Sub OnSettoreCommercialeChanged()
+    End Sub
+    Partial Private Sub OnCanaleDistributivoChanging(value As String)
+    End Sub
+    Partial Private Sub OnCanaleDistributivoChanged()
+    End Sub
+    Partial Private Sub OnOdVChanging(value As String)
+    End Sub
+    Partial Private Sub OnOdVChanged()
+    End Sub
+    Partial Private Sub OnCodiceClienteChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodiceClienteChanged()
+    End Sub
+    Partial Private Sub OnAnagraficaClienteChanging(value As String)
+    End Sub
+    Partial Private Sub OnAnagraficaClienteChanged()
+    End Sub
+    Partial Private Sub OnNazioneChanging(value As String)
+    End Sub
+    Partial Private Sub OnNazioneChanged()
+    End Sub
+    Partial Private Sub OnPosizioneChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnPosizioneChanged()
+    End Sub
+    Partial Private Sub OnCodiceMaterialeChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodiceMaterialeChanged()
+    End Sub
+    Partial Private Sub OnAnagraficaMaterialeChanging(value As String)
+    End Sub
+    Partial Private Sub OnAnagraficaMaterialeChanged()
+    End Sub
+    Partial Private Sub OnSituazioneSpedizioneChanging(value As String)
+    End Sub
+    Partial Private Sub OnSituazioneSpedizioneChanged()
+    End Sub
+    Partial Private Sub OnDataSpedizioneChanging(value As Date)
+    End Sub
+    Partial Private Sub OnDataSpedizioneChanged()
+    End Sub
+    Partial Private Sub OnDtSped1Changing(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDtSped1Changed()
+    End Sub
+    Partial Private Sub OnDtSped2Changing(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDtSped2Changed()
+    End Sub
+    Partial Private Sub OnAutoreChanging(value As String)
+    End Sub
+    Partial Private Sub OnAutoreChanged()
+    End Sub
+    Partial Private Sub OnNoteChanging(value As String)
+    End Sub
+    Partial Private Sub OnNoteChanged()
+    End Sub
+    Partial Private Sub OnRifProgrammaChanging(value As String)
+    End Sub
+    Partial Private Sub OnRifProgrammaChanged()
+    End Sub
+    Partial Private Sub OnDataUscitaChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDataUscitaChanged()
+    End Sub
+    Partial Private Sub OnDataConsegnaPrevistaChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDataConsegnaPrevistaChanged()
+    End Sub
+    Partial Private Sub OnStudioChanging(value As String)
+    End Sub
+    Partial Private Sub OnStudioChanged()
+    End Sub
+    Partial Private Sub OnCentroDiCostoChanging(value As String)
+    End Sub
+    Partial Private Sub OnCentroDiCostoChanged()
+    End Sub
+    Partial Private Sub OnOdAChanging(value As String)
+    End Sub
+    Partial Private Sub OnOdAChanged()
+    End Sub
+    Partial Private Sub OnPosizioneOdAChanging(value As String)
+    End Sub
+    Partial Private Sub OnPosizioneOdAChanged()
+    End Sub
+    Partial Private Sub OnCatalogoChanging(value As String)
+    End Sub
+    Partial Private Sub OnCatalogoChanged()
+    End Sub
+    Partial Private Sub OnDataArchiviazioneChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDataArchiviazioneChanged()
+    End Sub
+    Partial Private Sub OnNumeroArchiviazioneChanging(value As String)
+    End Sub
+    Partial Private Sub OnNumeroArchiviazioneChanged()
+    End Sub
+    Partial Private Sub OnNumeroArchiviazioneTavoleChanging(value As String)
+    End Sub
+    Partial Private Sub OnNumeroArchiviazioneTavoleChanged()
+    End Sub
+    Partial Private Sub OnOreSAPChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnOreSAPChanged()
+    End Sub
+    Partial Private Sub OnOreDisegnoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnOreDisegnoChanged()
+    End Sub
+    Partial Private Sub OnCostoFatturatoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCostoFatturatoChanged()
+    End Sub
+    Partial Private Sub OnCostoPrevistoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCostoPrevistoChanged()
+    End Sub
+    Partial Private Sub OnScostamentoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnScostamentoChanged()
+    End Sub
+    Partial Private Sub OnNoteAggChanging(value As String)
+    End Sub
+    Partial Private Sub OnNoteAggChanged()
+    End Sub
+    Partial Private Sub OnIsAtmChanging(value As System.Nullable(Of Boolean))
+    End Sub
+    Partial Private Sub OnIsAtmChanged()
+    End Sub
+    Partial Private Sub OnAtmStringChanging(value As String)
+    End Sub
+    Partial Private Sub OnAtmStringChanged()
+    End Sub
+    Partial Private Sub OnIsStringBeforeChanging(value As System.Nullable(Of Boolean))
+    End Sub
+    Partial Private Sub OnIsStringBeforeChanged()
+    End Sub
+    #End Region
+	
 	Public Sub New()
 		MyBase.New
+		OnCreated
 	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Id", DbType:="Int NOT NULL", IsPrimaryKey:=true)>  _
+	Public Property Id() As Integer
+		Get
+			Return Me._Id
+		End Get
+		Set
+			If ((Me._Id = value)  _
+						= false) Then
+				Me.OnIdChanging(value)
+				Me.SendPropertyChanging
+				Me._Id = value
+				Me.SendPropertyChanged("Id")
+				Me.OnIdChanged
+			End If
+		End Set
+	End Property
 	
 	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anno", DbType:="Int NOT NULL")>  _
 	Public Property Anno() As Integer
@@ -156,7 +350,11 @@ Partial Public Class tSituazione
 		Set
 			If ((Me._Anno = value)  _
 						= false) Then
+				Me.OnAnnoChanging(value)
+				Me.SendPropertyChanging
 				Me._Anno = value
+				Me.SendPropertyChanged("Anno")
+				Me.OnAnnoChanged
 			End If
 		End Set
 	End Property
@@ -168,7 +366,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._Produttore, value) = false) Then
+				Me.OnProduttoreChanging(value)
+				Me.SendPropertyChanging
 				Me._Produttore = value
+				Me.SendPropertyChanged("Produttore")
+				Me.OnProduttoreChanged
 			End If
 		End Set
 	End Property
@@ -180,19 +382,27 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._Equipment, value) = false) Then
+				Me.OnEquipmentChanging(value)
+				Me.SendPropertyChanging
 				Me._Equipment = value
+				Me.SendPropertyChanged("Equipment")
+				Me.OnEquipmentChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SettoreCommerciale", DbType:="VarChar(2) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SettoreCommerciale", DbType:="VarChar(4) NOT NULL", CanBeNull:=false)>  _
 	Public Property SettoreCommerciale() As String
 		Get
 			Return Me._SettoreCommerciale
 		End Get
 		Set
 			If (String.Equals(Me._SettoreCommerciale, value) = false) Then
+				Me.OnSettoreCommercialeChanging(value)
+				Me.SendPropertyChanging
 				Me._SettoreCommerciale = value
+				Me.SendPropertyChanged("SettoreCommerciale")
+				Me.OnSettoreCommercialeChanged
 			End If
 		End Set
 	End Property
@@ -204,7 +414,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._CanaleDistributivo, value) = false) Then
+				Me.OnCanaleDistributivoChanging(value)
+				Me.SendPropertyChanging
 				Me._CanaleDistributivo = value
+				Me.SendPropertyChanged("CanaleDistributivo")
+				Me.OnCanaleDistributivoChanged
 			End If
 		End Set
 	End Property
@@ -216,7 +430,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._OdV, value) = false) Then
+				Me.OnOdVChanging(value)
+				Me.SendPropertyChanging
 				Me._OdV = value
+				Me.SendPropertyChanged("OdV")
+				Me.OnOdVChanged
 			End If
 		End Set
 	End Property
@@ -228,7 +446,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._CodiceCliente, value) = false) Then
+				Me.OnCodiceClienteChanging(value)
+				Me.SendPropertyChanging
 				Me._CodiceCliente = value
+				Me.SendPropertyChanged("CodiceCliente")
+				Me.OnCodiceClienteChanged
 			End If
 		End Set
 	End Property
@@ -240,7 +462,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._AnagraficaCliente, value) = false) Then
+				Me.OnAnagraficaClienteChanging(value)
+				Me.SendPropertyChanging
 				Me._AnagraficaCliente = value
+				Me.SendPropertyChanged("AnagraficaCliente")
+				Me.OnAnagraficaClienteChanged
 			End If
 		End Set
 	End Property
@@ -252,7 +478,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._Nazione, value) = false) Then
+				Me.OnNazioneChanging(value)
+				Me.SendPropertyChanging
 				Me._Nazione = value
+				Me.SendPropertyChanged("Nazione")
+				Me.OnNazioneChanged
 			End If
 		End Set
 	End Property
@@ -265,7 +495,11 @@ Partial Public Class tSituazione
 		Set
 			If ((Me._Posizione = value)  _
 						= false) Then
+				Me.OnPosizioneChanging(value)
+				Me.SendPropertyChanging
 				Me._Posizione = value
+				Me.SendPropertyChanged("Posizione")
+				Me.OnPosizioneChanged
 			End If
 		End Set
 	End Property
@@ -277,7 +511,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._CodiceMateriale, value) = false) Then
+				Me.OnCodiceMaterialeChanging(value)
+				Me.SendPropertyChanging
 				Me._CodiceMateriale = value
+				Me.SendPropertyChanged("CodiceMateriale")
+				Me.OnCodiceMaterialeChanged
 			End If
 		End Set
 	End Property
@@ -289,19 +527,27 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._AnagraficaMateriale, value) = false) Then
+				Me.OnAnagraficaMaterialeChanging(value)
+				Me.SendPropertyChanging
 				Me._AnagraficaMateriale = value
+				Me.SendPropertyChanged("AnagraficaMateriale")
+				Me.OnAnagraficaMaterialeChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SituazioneSpedizione", DbType:="VarChar(1) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SituazioneSpedizione", DbType:="VarChar(1)")>  _
 	Public Property SituazioneSpedizione() As String
 		Get
 			Return Me._SituazioneSpedizione
 		End Get
 		Set
 			If (String.Equals(Me._SituazioneSpedizione, value) = false) Then
+				Me.OnSituazioneSpedizioneChanging(value)
+				Me.SendPropertyChanging
 				Me._SituazioneSpedizione = value
+				Me.SendPropertyChanged("SituazioneSpedizione")
+				Me.OnSituazioneSpedizioneChanged
 			End If
 		End Set
 	End Property
@@ -314,7 +560,11 @@ Partial Public Class tSituazione
 		Set
 			If ((Me._DataSpedizione = value)  _
 						= false) Then
+				Me.OnDataSpedizioneChanging(value)
+				Me.SendPropertyChanging
 				Me._DataSpedizione = value
+				Me.SendPropertyChanged("DataSpedizione")
+				Me.OnDataSpedizioneChanged
 			End If
 		End Set
 	End Property
@@ -326,7 +576,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._DtSped1.Equals(value) = false) Then
+				Me.OnDtSped1Changing(value)
+				Me.SendPropertyChanging
 				Me._DtSped1 = value
+				Me.SendPropertyChanged("DtSped1")
+				Me.OnDtSped1Changed
 			End If
 		End Set
 	End Property
@@ -338,19 +592,27 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._DtSped2.Equals(value) = false) Then
+				Me.OnDtSped2Changing(value)
+				Me.SendPropertyChanging
 				Me._DtSped2 = value
+				Me.SendPropertyChanged("DtSped2")
+				Me.OnDtSped2Changed
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Autore", DbType:="VarChar(40) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Autore", DbType:="VarChar(40)")>  _
 	Public Property Autore() As String
 		Get
 			Return Me._Autore
 		End Get
 		Set
 			If (String.Equals(Me._Autore, value) = false) Then
+				Me.OnAutoreChanging(value)
+				Me.SendPropertyChanging
 				Me._Autore = value
+				Me.SendPropertyChanged("Autore")
+				Me.OnAutoreChanged
 			End If
 		End Set
 	End Property
@@ -362,7 +624,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._Note, value) = false) Then
+				Me.OnNoteChanging(value)
+				Me.SendPropertyChanging
 				Me._Note = value
+				Me.SendPropertyChanged("Note")
+				Me.OnNoteChanged
 			End If
 		End Set
 	End Property
@@ -374,82 +640,107 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._RifProgramma, value) = false) Then
+				Me.OnRifProgrammaChanging(value)
+				Me.SendPropertyChanging
 				Me._RifProgramma = value
+				Me.SendPropertyChanged("RifProgramma")
+				Me.OnRifProgrammaChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DataUscita", DbType:="Date NOT NULL")>  _
-	Public Property DataUscita() As Date
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DataUscita", DbType:="Date")>  _
+	Public Property DataUscita() As System.Nullable(Of Date)
 		Get
 			Return Me._DataUscita
 		End Get
 		Set
-			If ((Me._DataUscita = value)  _
-						= false) Then
+			If (Me._DataUscita.Equals(value) = false) Then
+				Me.OnDataUscitaChanging(value)
+				Me.SendPropertyChanging
 				Me._DataUscita = value
+				Me.SendPropertyChanged("DataUscita")
+				Me.OnDataUscitaChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DataConsegnaPrevista", DbType:="Date NOT NULL")>  _
-	Public Property DataConsegnaPrevista() As Date
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DataConsegnaPrevista", DbType:="Date")>  _
+	Public Property DataConsegnaPrevista() As System.Nullable(Of Date)
 		Get
 			Return Me._DataConsegnaPrevista
 		End Get
 		Set
-			If ((Me._DataConsegnaPrevista = value)  _
-						= false) Then
+			If (Me._DataConsegnaPrevista.Equals(value) = false) Then
+				Me.OnDataConsegnaPrevistaChanging(value)
+				Me.SendPropertyChanging
 				Me._DataConsegnaPrevista = value
+				Me.SendPropertyChanged("DataConsegnaPrevista")
+				Me.OnDataConsegnaPrevistaChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Studio", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Studio", DbType:="VarChar(20)")>  _
 	Public Property Studio() As String
 		Get
 			Return Me._Studio
 		End Get
 		Set
 			If (String.Equals(Me._Studio, value) = false) Then
+				Me.OnStudioChanging(value)
+				Me.SendPropertyChanging
 				Me._Studio = value
+				Me.SendPropertyChanged("Studio")
+				Me.OnStudioChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CentroDiCosto", DbType:="BigInt NOT NULL")>  _
-	Public Property CentroDiCosto() As Long
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CentroDiCosto", DbType:="VarChar(15)")>  _
+	Public Property CentroDiCosto() As String
 		Get
 			Return Me._CentroDiCosto
 		End Get
 		Set
-			If ((Me._CentroDiCosto = value)  _
-						= false) Then
+			If (String.Equals(Me._CentroDiCosto, value) = false) Then
+				Me.OnCentroDiCostoChanging(value)
+				Me.SendPropertyChanging
 				Me._CentroDiCosto = value
+				Me.SendPropertyChanged("CentroDiCosto")
+				Me.OnCentroDiCostoChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OdA", DbType:="VarChar(20) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OdA", DbType:="VarChar(20)")>  _
 	Public Property OdA() As String
 		Get
 			Return Me._OdA
 		End Get
 		Set
 			If (String.Equals(Me._OdA, value) = false) Then
+				Me.OnOdAChanging(value)
+				Me.SendPropertyChanging
 				Me._OdA = value
+				Me.SendPropertyChanged("OdA")
+				Me.OnOdAChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PosizioneOdA", DbType:="VarChar(12) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PosizioneOdA", DbType:="VarChar(12)")>  _
 	Public Property PosizioneOdA() As String
 		Get
 			Return Me._PosizioneOdA
 		End Get
 		Set
 			If (String.Equals(Me._PosizioneOdA, value) = false) Then
+				Me.OnPosizioneOdAChanging(value)
+				Me.SendPropertyChanging
 				Me._PosizioneOdA = value
+				Me.SendPropertyChanged("PosizioneOdA")
+				Me.OnPosizioneOdAChanged
 			End If
 		End Set
 	End Property
@@ -461,7 +752,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._Catalogo, value) = false) Then
+				Me.OnCatalogoChanging(value)
+				Me.SendPropertyChanging
 				Me._Catalogo = value
+				Me.SendPropertyChanged("Catalogo")
+				Me.OnCatalogoChanged
 			End If
 		End Set
 	End Property
@@ -473,7 +768,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._DataArchiviazione.Equals(value) = false) Then
+				Me.OnDataArchiviazioneChanging(value)
+				Me.SendPropertyChanging
 				Me._DataArchiviazione = value
+				Me.SendPropertyChanged("DataArchiviazione")
+				Me.OnDataArchiviazioneChanged
 			End If
 		End Set
 	End Property
@@ -485,7 +784,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._NumeroArchiviazione, value) = false) Then
+				Me.OnNumeroArchiviazioneChanging(value)
+				Me.SendPropertyChanging
 				Me._NumeroArchiviazione = value
+				Me.SendPropertyChanged("NumeroArchiviazione")
+				Me.OnNumeroArchiviazioneChanged
 			End If
 		End Set
 	End Property
@@ -497,7 +800,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._NumeroArchiviazioneTavole, value) = false) Then
+				Me.OnNumeroArchiviazioneTavoleChanging(value)
+				Me.SendPropertyChanging
 				Me._NumeroArchiviazioneTavole = value
+				Me.SendPropertyChanged("NumeroArchiviazioneTavole")
+				Me.OnNumeroArchiviazioneTavoleChanged
 			End If
 		End Set
 	End Property
@@ -509,7 +816,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._OreSAP.Equals(value) = false) Then
+				Me.OnOreSAPChanging(value)
+				Me.SendPropertyChanging
 				Me._OreSAP = value
+				Me.SendPropertyChanged("OreSAP")
+				Me.OnOreSAPChanged
 			End If
 		End Set
 	End Property
@@ -521,43 +832,59 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._OreDisegno.Equals(value) = false) Then
+				Me.OnOreDisegnoChanging(value)
+				Me.SendPropertyChanging
 				Me._OreDisegno = value
+				Me.SendPropertyChanged("OreDisegno")
+				Me.OnOreDisegnoChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoFatturato", DbType:="NChar(10)")>  _
-	Public Property CostoFatturato() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoFatturato", DbType:="Decimal(4,1)")>  _
+	Public Property CostoFatturato() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoFatturato
 		End Get
 		Set
-			If (String.Equals(Me._CostoFatturato, value) = false) Then
+			If (Me._CostoFatturato.Equals(value) = false) Then
+				Me.OnCostoFatturatoChanging(value)
+				Me.SendPropertyChanging
 				Me._CostoFatturato = value
+				Me.SendPropertyChanged("CostoFatturato")
+				Me.OnCostoFatturatoChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPrevisto", DbType:="NChar(10)")>  _
-	Public Property CostoPrevisto() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPrevisto", DbType:="Decimal(4,1)")>  _
+	Public Property CostoPrevisto() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoPrevisto
 		End Get
 		Set
-			If (String.Equals(Me._CostoPrevisto, value) = false) Then
+			If (Me._CostoPrevisto.Equals(value) = false) Then
+				Me.OnCostoPrevistoChanging(value)
+				Me.SendPropertyChanging
 				Me._CostoPrevisto = value
+				Me.SendPropertyChanged("CostoPrevisto")
+				Me.OnCostoPrevistoChanged
 			End If
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Scostamento", DbType:="NChar(10)")>  _
-	Public Property Scostamento() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Scostamento", DbType:="Decimal(4,1)")>  _
+	Public Property Scostamento() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Scostamento
 		End Get
 		Set
-			If (String.Equals(Me._Scostamento, value) = false) Then
+			If (Me._Scostamento.Equals(value) = false) Then
+				Me.OnScostamentoChanging(value)
+				Me.SendPropertyChanging
 				Me._Scostamento = value
+				Me.SendPropertyChanged("Scostamento")
+				Me.OnScostamentoChanged
 			End If
 		End Set
 	End Property
@@ -569,7 +896,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._NoteAgg, value) = false) Then
+				Me.OnNoteAggChanging(value)
+				Me.SendPropertyChanging
 				Me._NoteAgg = value
+				Me.SendPropertyChanged("NoteAgg")
+				Me.OnNoteAggChanged
 			End If
 		End Set
 	End Property
@@ -581,7 +912,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._IsAtm.Equals(value) = false) Then
+				Me.OnIsAtmChanging(value)
+				Me.SendPropertyChanging
 				Me._IsAtm = value
+				Me.SendPropertyChanged("IsAtm")
+				Me.OnIsAtmChanged
 			End If
 		End Set
 	End Property
@@ -593,7 +928,11 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (String.Equals(Me._AtmString, value) = false) Then
+				Me.OnAtmStringChanging(value)
+				Me.SendPropertyChanging
 				Me._AtmString = value
+				Me.SendPropertyChanged("AtmString")
+				Me.OnAtmStringChanged
 			End If
 		End Set
 	End Property
@@ -605,8 +944,30 @@ Partial Public Class tSituazione
 		End Get
 		Set
 			If (Me._IsStringBefore.Equals(value) = false) Then
+				Me.OnIsStringBeforeChanging(value)
+				Me.SendPropertyChanging
 				Me._IsStringBefore = value
+				Me.SendPropertyChanged("IsStringBefore")
+				Me.OnIsStringBeforeChanged
 			End If
 		End Set
 	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
 End Class

@@ -2,10 +2,11 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=IPR-SQL01;Initial Catalog=Situation;Persist Security Info=True;User ID=usercataloghi" SettingsObjectName="COSiFa.My.MySettings" SettingsPropertyName="SituationConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tSituazione" Member="tSituazione">
     <Type Name="tSituazione">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Anno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Produttore" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="Equipment" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
-      <Column Name="SettoreCommerciale" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="SettoreCommerciale" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="CanaleDistributivo" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="OdV" Type="System.String" DbType="VarChar(18) NOT NULL" CanBeNull="false" />
       <Column Name="CodiceCliente" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
@@ -14,28 +15,28 @@
       <Column Name="Posizione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CodiceMateriale" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="AnagraficaMateriale" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="SituazioneSpedizione" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="SituazioneSpedizione" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
       <Column Name="DataSpedizione" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="DtSped1" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="DtSped2" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Autore" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Autore" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
       <Column Name="Note" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="RifProgramma" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
-      <Column Name="DataUscita" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="DataConsegnaPrevista" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Studio" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="CentroDiCosto" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="OdA" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="PosizioneOdA" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="DataUscita" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DataConsegnaPrevista" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Studio" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CentroDiCosto" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="OdA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PosizioneOdA" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
       <Column Name="Catalogo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="DataArchiviazione" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="NumeroArchiviazione" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="NumeroArchiviazioneTavole" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="OreSAP" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
       <Column Name="OreDisegno" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
-      <Column Name="CostoFatturato" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="CostoPrevisto" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="Scostamento" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="CostoFatturato" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
+      <Column Name="CostoPrevisto" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
+      <Column Name="Scostamento" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
       <Column Name="NoteAgg" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="IsAtm" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="AtmString" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
