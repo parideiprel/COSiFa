@@ -325,7 +325,7 @@ Partial Public Class tSituazione
 		OnCreated
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Id", DbType:="Int NOT NULL", IsPrimaryKey:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Id", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
 	Public Property Id() As Integer
 		Get
 			Return Me._Id

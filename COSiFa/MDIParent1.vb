@@ -112,6 +112,17 @@ Public Class MDIParent1
         Dim xAtmString As String = String.Empty
         Dim xIsStringBefore As Boolean
 
+        Dim iBottomCell As Integer
+
+        Dim tSitu As New tSituazioneDataContext()
+        Dim tSit As New tSituazione
+
+        Dim lstAtmString As New List(Of String)(New String() {"atm", "ate", "atomizzatore"}) 'lista x stringhe ATM
+
+        Dim bIsAList As Boolean = False
+
+        '********************** FINE DEFINIZIONI VARIABILI *********************************************
+
         'ottengo il file da lavorare con un filedialog
         Dim sFile As String
         OpenFileDialog1.Filter = "File Excel (*.xlsx) | *.xlsx"
@@ -127,11 +138,20 @@ Public Class MDIParent1
         xlFile.Activate()
 
         xlSheet = xlFile.Worksheets(1)
-        xlRange = xlSheet.Range("A2", "AI10000")
+        xlRange = xlSheet.Range("A2")
+        Dim ret As Object = xlRange.Select()
+        'xlRange = xlSheet.Range("A2", "AI10000")
+        xlRange = xlRange.End(Microsoft.Office.Interop.Excel.XlDirection.xlDown)
+        ret = xlRange.Select()
+        iBottomCell = xlRange.Row
+        xlRange = xlSheet.Range("A2")
+        ret = xlRange.Select()
 
-        ' TODO: Occorre fare ciclo per leggere tutti i dati !!!
+        ' TODO: Occorre gestire la situazione di più dati nella stessa cella (+ q.e. identici con matr. diverse - es. q.tà=4...)
 
-        Dim riga As Integer
+        Dim riga As Integer = 0
+        '       For pippo As Integer = 1 To iBottomCell
+        'riga = pippo
         riga = 71
 
         xAnno = xlRange.Cells(riga, 1).value
@@ -169,21 +189,17 @@ Public Class MDIParent1
         xCostoPreventivato = xlRange.Cells(riga, 33).value
         xScostamento = xlRange.Cells(riga, 34).value
         xNoteAgg = xlRange.Cells(riga, 35).value
-        'le prossime 3 variabili non sono nel file excel ma sono una rielaborazione di dati presenti
-        'necessaria per gestire gli inserimenti manuali di Galli (per gli ATM)
-        'xIsAtm
-        'xAtmString
-        'xIsStringBefore
 
+        '***** Verifica se matricola è di un ATM ******
+        For Each l As String In lstAtmString
+            If xEquipment.ToLower.Contains(l) Then
+                xIsAtm = True
+                Exit For
+            Else
+                xIsAtm = False
+            End If
+        Next
 
-
-        If InStr(xEquipment.ToLower, "atm", CompareMethod.Text) <> 0 Then
-            'ho trovato la stringa ATM nel campo xEquipment, quindi è un ATM
-            'setto xIsAtm a true (visto che è un bool)
-            xIsAtm = True
-        Else
-            xIsAtm = False
-        End If
         If xIsAtm Then
             Dim ResultString As String
             Try
@@ -206,10 +222,22 @@ Public Class MDIParent1
                 MsgBox("Stringa non trovata")
             End Try
         End If
-        Dim tSitu As New tSituazioneDataContext()
-        Dim tSit As New tSituazione
 
-        tSitu.Log = Console.Out
+        '******** Verifico se matricola è una lista di matricole per produz. di + q.e. identici *********
+        If xEquipment.Contains(vbLf) Then
+            bIsAList = True
+        Else
+            bIsAList = False
+        End If
+
+        If bIsAList Then
+            Dim lstEqp As New List(Of String)(xEquipment.Split(vbLf))
+        End If
+
+
+        '******* Scrittura dati nel DB SQL ************
+
+        'tSitu.Log = Console.Out
 
         tSit.Anno = xAnno
         tSit.Produttore = xProduttore
@@ -246,61 +274,19 @@ Public Class MDIParent1
         tSit.CostoPrevisto = xCostoPreventivato
         tSit.Scostamento = xScostamento
         tSit.NoteAgg = xNoteAgg
-        'xIsAtm
-        'xAtmString
-        'xIsStringBefore
         tSit.IsAtm = xIsAtm
         tSit.AtmString = xAtmString
         tSit.IsStringBefore = xIsStringBefore
 
         tSitu.tSituazione.InsertOnSubmit(tSit)
 
-        'Console.WriteLine("xAnno: " + Len(xAnno).ToString)
-        'Console.WriteLine("xProduttore: " + Len(xProduttore).ToString)
-        'Console.WriteLine("xEquipment: " + Len(xEquipment).ToString)
-        'Console.WriteLine("xSettoreCommerciale: " + Len(xSettoreCommerciale).ToString)
-        'Console.WriteLine("xCanaleDistributivo: " + Len(xCanaleDistributivo).ToString)
-        'Console.WriteLine("xOdV: " + Len(xOdV).ToString)
-        'Console.WriteLine("xCodiceCliente: " + Len(xCodiceCliente).ToString)
-        'Console.WriteLine("xAnagraficaCliente: " + Len(xAnagraficaCliente).ToString)
-        'Console.WriteLine("xNazione: " + Len(xNazione).ToString)
-        'Console.WriteLine("xPosizione: " + Len(xPosizione).ToString)
-        'Console.WriteLine("xCodiceMateriale: " + Len(xCodiceMateriale).ToString)
-        'Console.WriteLine("xAnagraficaMateriale: " + Len(xAnagraficaMateriale).ToString)
-        'Console.WriteLine("xSituazioneSpedizione: " + Len(xSituazioneSpedizione).ToString)
-        'Console.WriteLine("xDataSpedizione: " + Len(xDataSpedizione).ToString)
-        'Console.WriteLine("xDtSped1: " + Len(xDtSped1).ToString)
-        'Console.WriteLine("xDtSped2: " + Len(xDtSped2).ToString)
-        'Console.WriteLine("xAutore: " + Len(xAutore).ToString)
-        'Console.WriteLine("xNote: " + Len(xNote).ToString)
-        'Console.WriteLine("xRiferimentoProgramma: " + Len(xRiferimentoProgramma).ToString)
-        'Console.WriteLine("xDataUscita: " + Len(xDataUscita).ToString)
-        'Console.WriteLine("xDataConsegnaPrevista: " + Len(xDataConsegnaPrevista).ToString)
-        'Console.WriteLine("xStudio: " + Len(xStudio).ToString)
-        'Console.WriteLine("xCdC: " + Len(xCdC).ToString)
-        'Console.WriteLine("xOdA: " + Len(xOdA).ToString)
-        'Console.WriteLine("xPosizioneOdA: " + Len(xPosizioneOdA).ToString)
-        'Console.WriteLine("xCatalogo: " + Len(xCatalogo).ToString)
-        'Console.WriteLine("xDataArchiviazione: " + Len(xDataArchiviazione).ToString)
-        'Console.WriteLine("xNumeroArchiviazione: " + Len(xNumeroArchiviazione).ToString)
-        'Console.WriteLine("xNumeroArchiviazioneTavole: " + Len(xNumeroArchiviazioneTavole).ToString)
-        'Console.WriteLine("xOreSap: " + Len(xOreSap).ToString)
-        'Console.WriteLine("xOreDisegno: " + Len(xOreDisegno).ToString)
-        'Console.WriteLine("xCostoFatturato: " + Len(xCostoFatturato).ToString)
-        'Console.WriteLine("xCostoPreventivato: " + Len(xCostoPreventivato).ToString)
-        'Console.WriteLine("xScostamento: " + Len(xScostamento).ToString)
-        'Console.WriteLine("xNoteAgg: " + Len(xNoteAgg).ToString)
-        'Console.WriteLine("xIsAtm: " + Len(xIsAtm).ToString)
-        'Console.WriteLine("xAtmString: " + Len(xAtmString).ToString)
-        'Console.WriteLine("xIsStringBefore: " + Len(xIsStringBefore).ToString)
-
-
         Try
             tSitu.SubmitChanges()
         Catch ex As Exception
             MsgBox("CAZZO UNA ECCEZZIONE !!! LINQ->SQL" + vbCrLf + vbCrLf + ex.Message)
+            Console.WriteLine("********* EXCEPTION ***********" + vbCrLf + ex.Message + vbCrLf + "********* EXCEPTION ***********")
         End Try
-
+        'Next
         xlFile.Close(False) 'chiude senza salvare
         xlRange = Nothing
         xlSheet = Nothing
@@ -311,8 +297,9 @@ Public Class MDIParent1
         For Each item In proc
             item.Kill()
         Next
+        MsgBox("Importazione Situazione Terminata!")
     End Sub
 
-  
+
 
 End Class
