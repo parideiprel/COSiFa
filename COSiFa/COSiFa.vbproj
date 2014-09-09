@@ -96,6 +96,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="clsDatiExcel.vb" />
+    <Compile Include="myFunctions.vb" />
     <Compile Include="tOre.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

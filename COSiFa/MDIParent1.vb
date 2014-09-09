@@ -4,19 +4,12 @@ Imports System.Text.RegularExpressions
 
 Public Class MDIParent1
 
-
     Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click
         'Me.Close()
 
         End
     End Sub
 
-
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-
-
-
-    End Sub
     Shared userlevel As Integer = 0
     Dim cn As SqlClient.SqlConnection = New SqlClient.SqlConnection(My.Resources.connectionString)
 
@@ -73,45 +66,45 @@ Public Class MDIParent1
         Dim xlRange As Microsoft.Office.Interop.Excel.Range
 
         'Definisco le variabili per leggere le colonne dal mio file excel
-        Dim xAnno As Integer
-        Dim xProduttore As String
-        Dim xEquipment As String
-        Dim xSettoreCommerciale As String
-        Dim xCanaleDistributivo As String
-        Dim xOdV As String
-        Dim xCodiceCliente As String
-        Dim xAnagraficaCliente As String
-        Dim xNazione As String
-        Dim xPosizione As Integer
-        Dim xCodiceMateriale As String
-        Dim xAnagraficaMateriale As String
-        Dim xSituazioneSpedizione As String
-        Dim xDataSpedizione As Date
-        Dim xDtSped1 As Date
-        Dim xDtSped2 As Date
-        Dim xAutore As String
-        Dim xNote As String
-        Dim xRiferimentoProgramma As String
-        Dim xDataUscita As Date
-        Dim xDataConsegnaPrevista As Date
-        Dim xStudio As String
-        Dim xCdC As String
-        Dim xOdA As String
-        Dim xPosizioneOdA As Integer
-        Dim xCatalogo As String
-        Dim xDataArchiviazione As Date
-        Dim xNumeroArchiviazione As String
-        Dim xNumeroArchiviazioneTavole As String
-        Dim xOreSap As Single
-        Dim xOreDisegno As Single
-        Dim xCostoFatturato As Decimal
-        Dim xCostoPreventivato As Single
-        Dim xScostamento As Single
-        Dim xNoteAgg As String
-        Dim xIsAtm As Boolean
-        Dim xAtmString As String = String.Empty
-        Dim xIsStringBefore As Boolean
-
+        'Dim xAnno As Integer
+        'Dim xProduttore As String
+        'Dim xEquipment As String
+        'Dim xSettoreCommerciale As String
+        'Dim xCanaleDistributivo As String
+        'Dim xOdV As String
+        'Dim xCodiceCliente As String
+        'Dim xAnagraficaCliente As String
+        'Dim xNazione As String
+        'Dim xPosizione As Integer
+        'Dim xCodiceMateriale As String
+        'Dim xAnagraficaMateriale As String
+        'Dim xSituazioneSpedizione As String
+        'Dim xDataSpedizione As Date
+        'Dim xDtSped1 As Date
+        'Dim xDtSped2 As Date
+        'Dim xAutore As String
+        'Dim xNote As String
+        'Dim xRiferimentoProgramma As String
+        'Dim xDataUscita As Date
+        'Dim xDataConsegnaPrevista As Date
+        'Dim xStudio As String
+        'Dim xCdC As String
+        'Dim xOdA As String
+        'Dim xPosizioneOdA As Integer
+        'Dim xCatalogo As String
+        'Dim xDataArchiviazione As Date
+        'Dim xNumeroArchiviazione As String
+        'Dim xNumeroArchiviazioneTavole As String
+        'Dim xOreSap As Single
+        'Dim xOreDisegno As Single
+        'Dim xCostoFatturato As Decimal
+        'Dim xCostoPreventivato As Single
+        'Dim xScostamento As Single
+        'Dim xNoteAgg As String
+        'Dim xIsAtm As Boolean
+        'Dim xAtmString As String = String.Empty
+        'Dim xIsStringBefore As Boolean
+        Dim xls As New ClsDatiExcel
         Dim iBottomCell As Integer
 
         Dim tSitu As New tSituazioneDataContext()
@@ -154,68 +147,68 @@ Public Class MDIParent1
         'riga = pippo
         riga = 71
 
-        xAnno = xlRange.Cells(riga, 1).value
-        xProduttore = xlRange.Cells(riga, 2).value
-        xEquipment = xlRange.Cells(riga, 3).value
-        xSettoreCommerciale = xlRange.Cells(riga, 4).value
-        xCanaleDistributivo = xlRange.Cells(riga, 5).value
-        xOdV = xlRange.Cells(riga, 6).value
-        xCodiceCliente = xlRange.Cells(riga, 7).value
-        xAnagraficaCliente = xlRange.Cells(riga, 8).value
-        xNazione = xlRange.Cells(riga, 9).value
-        xPosizione = xlRange.Cells(riga, 10).value
-        xCodiceMateriale = xlRange.Cells(riga, 11).value
-        xAnagraficaMateriale = xlRange.Cells(riga, 12).value
-        xSituazioneSpedizione = xlRange.Cells(riga, 13).value
-        xDataSpedizione = xlRange.Cells(riga, 14).value
-        xDtSped1 = xlRange.Cells(riga, 15).value
-        xDtSped2 = xlRange.Cells(riga, 16).value
-        xAutore = xlRange.Cells(riga, 17).value
-        xNote = xlRange.Cells(riga, 18).value
-        xRiferimentoProgramma = xlRange.Cells(riga, 19).value
-        xDataUscita = xlRange.Cells(riga, 20).value
-        xDataConsegnaPrevista = xlRange.Cells(riga, 21).value
-        xStudio = xlRange.Cells(riga, 22).value
-        xCdC = xlRange.Cells(riga, 23).value
-        xOdA = xlRange.Cells(riga, 24).value
-        xPosizioneOdA = xlRange.Cells(riga, 25).value
-        xCatalogo = xlRange.Cells(riga, 26).value
-        xDataArchiviazione = xlRange.Cells(riga, 27).value
-        xNumeroArchiviazione = xlRange.Cells(riga, 28).value
-        xNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
-        xOreSap = xlRange.Cells(riga, 30).value
-        xOreDisegno = xlRange.Cells(riga, 31).value
-        xCostoFatturato = xlRange.Cells(riga, 32).value
-        xCostoPreventivato = xlRange.Cells(riga, 33).value
-        xScostamento = xlRange.Cells(riga, 34).value
-        xNoteAgg = xlRange.Cells(riga, 35).value
+        xls.XAnno = xlRange.Cells(riga, 1).value
+        xls.XProduttore = xlRange.Cells(riga, 2).value
+        xls.XEquipment = xlRange.Cells(riga, 3).value
+        xls.XSettoreCommerciale = xlRange.Cells(riga, 4).value
+        xls.XCanaleDistributivo = xlRange.Cells(riga, 5).value
+        xls.XOdV = xlRange.Cells(riga, 6).value
+        xls.XCodiceCliente = xlRange.Cells(riga, 7).value
+        xls.XAnagraficaCliente = xlRange.Cells(riga, 8).value
+        xls.XNazione = xlRange.Cells(riga, 9).value
+        xls.XPosizione = xlRange.Cells(riga, 10).value
+        xls.XCodiceMateriale = xlRange.Cells(riga, 11).value
+        xls.XAnagraficaMateriale = xlRange.Cells(riga, 12).value
+        xls.XSituazioneSpedizione = xlRange.Cells(riga, 13).value
+        xls.XDataSpedizione = xlRange.Cells(riga, 14).value
+        xls.XDtSped1 = xlRange.Cells(riga, 15).value
+        xls.XDtSped2 = xlRange.Cells(riga, 16).value
+        xls.XAutore = xlRange.Cells(riga, 17).value
+        xls.XNote = xlRange.Cells(riga, 18).value
+        xls.XRiferimentoProgramma = xlRange.Cells(riga, 19).value
+        xls.XDataUscita = xlRange.Cells(riga, 20).value
+        xls.XDataConsegnaPrevista = xlRange.Cells(riga, 21).value
+        xls.XStudio = xlRange.Cells(riga, 22).value
+        xls.XCdC = xlRange.Cells(riga, 23).value
+        xls.XOdA = xlRange.Cells(riga, 24).value
+        xls.XPosizioneOdA = xlRange.Cells(riga, 25).value
+        xls.XCatalogo = xlRange.Cells(riga, 26).value
+        xls.XDataArchiviazione = xlRange.Cells(riga, 27).value
+        xls.XNumeroArchiviazione = xlRange.Cells(riga, 28).value
+        xls.XNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
+        xls.XOreSap = xlRange.Cells(riga, 30).value
+        xls.XOreDisegno = xlRange.Cells(riga, 31).value
+        xls.XCostoFatturato = xlRange.Cells(riga, 32).value
+        xls.XCostoPreventivato = xlRange.Cells(riga, 33).value
+        xls.XScostamento = xlRange.Cells(riga, 34).value
+        xls.XNoteAgg = xlRange.Cells(riga, 35).value
 
         '***** Verifica se matricola è di un ATM ******
         For Each l As String In lstAtmString
-            If xEquipment.ToLower.Contains(l) Then
-                xIsAtm = True
+            If xls.XEquipment.ToLower.Contains(l) Then
+                xls.XIsAtm = True
                 Exit For
             Else
-                xIsAtm = False
+                xls.XIsAtm = False
             End If
         Next
 
-        If xIsAtm Then
-            Dim ResultString As String
+        If xls.XIsAtm Then
+            Dim resultString As String
             Try
-                Dim RegexObj As New Regex("[0-9]{8}")
-                ResultString = RegexObj.Match(xEquipment).Value
-                Select Case InStr(xEquipment, ResultString)
+                Dim regexObj As New Regex("[0-9]{8}")
+                resultString = regexObj.Match(xls.XEquipment).Value
+                Select Case InStr(xls.XEquipment, resultString)
                     Case Is = 0
                         'il numero equipment è all'inizio
-                        xAtmString = xEquipment.Substring(8, xEquipment.Length - 1)
-                        xEquipment = ResultString
-                        xIsStringBefore = False
+                        xls.XAtmString = xls.XEquipment.Substring(8, xls.XEquipment.Length - 1)
+                        xls.XEquipment = resultString
+                        xls.XIsStringBefore = False
                     Case Is > 0
                         'il numero è dopo l'inizio stringa
-                        xAtmString = xEquipment.Substring(0, xEquipment.Length - 8)
-                        xEquipment = ResultString
-                        xIsStringBefore = True
+                        xls.XAtmString = xls.XEquipment.Substring(0, xls.XEquipment.Length - 8)
+                        xls.XEquipment = resultString
+                        xls.XIsStringBefore = True
                 End Select
             Catch ex As ArgumentException
                 'Syntax error in the regular expression
@@ -224,69 +217,26 @@ Public Class MDIParent1
         End If
 
         '******** Verifico se matricola è una lista di matricole per produz. di + q.e. identici *********
-        If xEquipment.Contains(vbLf) Then
+        If xls.XEquipment.Contains(vbLf) Then
             bIsAList = True
         Else
             bIsAList = False
         End If
 
         If bIsAList Then
-            Dim lstEqp As New List(Of String)(xEquipment.Split(vbLf))
+            Dim lstEqp As New List(Of String)(xls.XEquipment.Split(vbLf))
+            For Each a As String In lstEqp
+                ' per ogni stringa di matricola reitero la scrittura sul DB
+                xls.XEquipment = a
+                ScriviDb(tSit, tSitu, xls)
+            Next
+
         End If
 
+        If bIsAList = False Then
+            ScriviDb(tSit, tSitu, xls)
+        End If
 
-        '******* Scrittura dati nel DB SQL ************
-
-        'tSitu.Log = Console.Out
-
-        tSit.Anno = xAnno
-        tSit.Produttore = xProduttore
-        tSit.Equipment = xEquipment
-        tSit.SettoreCommerciale = xSettoreCommerciale
-        tSit.CanaleDistributivo = xCanaleDistributivo
-        tSit.OdV = xOdV
-        tSit.CodiceCliente = xCodiceCliente
-        tSit.AnagraficaCliente = xAnagraficaCliente
-        tSit.Nazione = xNazione
-        tSit.Posizione = xPosizione
-        tSit.CodiceMateriale = xCodiceMateriale
-        tSit.AnagraficaMateriale = xAnagraficaMateriale
-        tSit.SituazioneSpedizione = xSituazioneSpedizione
-        tSit.DataSpedizione = xDataSpedizione
-        tSit.DtSped1 = xDtSped1
-        tSit.DtSped2 = xDtSped2
-        tSit.Autore = xAutore
-        tSit.Note = xNote
-        tSit.RifProgramma = xRiferimentoProgramma
-        tSit.DataUscita = xDataUscita
-        tSit.DataConsegnaPrevista = xDataConsegnaPrevista
-        tSit.Studio = xStudio
-        tSit.CentroDiCosto = xCdC
-        tSit.OdA = xOdA
-        tSit.PosizioneOdA = xPosizioneOdA
-        tSit.Catalogo = xCatalogo
-        tSit.DataArchiviazione = xDataArchiviazione
-        tSit.NumeroArchiviazione = xNumeroArchiviazione
-        tSit.NumeroArchiviazioneTavole = xNumeroArchiviazioneTavole
-        tSit.OreSAP = xOreSap
-        tSit.OreDisegno = xOreDisegno
-        tSit.CostoFatturato = xCostoFatturato
-        tSit.CostoPrevisto = xCostoPreventivato
-        tSit.Scostamento = xScostamento
-        tSit.NoteAgg = xNoteAgg
-        tSit.IsAtm = xIsAtm
-        tSit.AtmString = xAtmString
-        tSit.IsStringBefore = xIsStringBefore
-
-        tSitu.tSituazione.InsertOnSubmit(tSit)
-
-        Try
-            tSitu.SubmitChanges()
-        Catch ex As Exception
-            MsgBox("CAZZO UNA ECCEZZIONE !!! LINQ->SQL" + vbCrLf + vbCrLf + ex.Message)
-            Console.WriteLine("********* EXCEPTION ***********" + vbCrLf + ex.Message + vbCrLf + "********* EXCEPTION ***********")
-        End Try
-        'Next
         xlFile.Close(False) 'chiude senza salvare
         xlRange = Nothing
         xlSheet = Nothing
@@ -299,7 +249,6 @@ Public Class MDIParent1
         Next
         MsgBox("Importazione Situazione Terminata!")
     End Sub
-
 
 
 End Class
