@@ -106,13 +106,15 @@ Public Class MDIParent1
         'Dim xIsStringBefore As Boolean
         Dim xls As New ClsDatiExcel
         Dim iBottomCell As Integer
+        Dim indice As Integer
 
         Dim tSitu As New tSituazioneDataContext()
-        Dim tSit As New tSituazione
+        'Dim tSit As New tSituazione
 
         Dim lstAtmString As New List(Of String)(New String() {"atm", "ate", "atomizzatore"}) 'lista x stringhe ATM
 
         Dim bIsAList As Boolean = False
+
 
         '********************** FINE DEFINIZIONI VARIABILI *********************************************
 
@@ -145,7 +147,7 @@ Public Class MDIParent1
         Dim riga As Integer = 0
         '       For pippo As Integer = 1 To iBottomCell
         'riga = pippo
-        riga = 71
+        riga = 431  'riga 71 corrisponde alla cella 72 di excel
 
         xls.XAnno = xlRange.Cells(riga, 1).value
         xls.XProduttore = xlRange.Cells(riga, 2).value
@@ -224,17 +226,21 @@ Public Class MDIParent1
         End If
 
         If bIsAList Then
+            indice = 0
             Dim lstEqp As New List(Of String)(xls.XEquipment.Split(vbLf))
             For Each a As String In lstEqp
                 ' per ogni stringa di matricola reitero la scrittura sul DB
+
                 xls.XEquipment = a
-                ScriviDb(tSit, tSitu, xls)
+                ScriviDb(tSitu, xls, lstEqp.IndexOf(a), lstEqp.Count)
+                indice += 1
+
             Next
 
         End If
 
         If bIsAList = False Then
-            ScriviDb(tSit, tSitu, xls)
+            ScriviDb(tSitu, xls, 0, 0)
         End If
 
         xlFile.Close(False) 'chiude senza salvare

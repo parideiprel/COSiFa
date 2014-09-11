@@ -153,7 +153,9 @@ Partial Public Class tSituazione
 	
 	Private _AtmString As String
 	
-	Private _IsStringBefore As System.Nullable(Of Boolean)
+    Private _IsStringBefore As System.Nullable(Of Boolean)
+
+    Private _HasException As Boolean
 	
     #Region "Definizioni metodo Extensibility"
     Partial Private Sub OnLoaded()
@@ -951,8 +953,17 @@ Partial Public Class tSituazione
 				Me.OnIsStringBeforeChanged
 			End If
 		End Set
-	End Property
-	
+    End Property
+
+    Public Property HasException As Boolean
+        Get
+            Return _HasException
+        End Get
+        Set(value As Boolean)
+            _HasException = value
+        End Set
+    End Property
+
 	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
 	
 	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
