@@ -109,11 +109,6 @@
     <Compile Include="frmInserimentoOre.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="tSituazione.designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tSituazione.dbml</DependentUpon>
-    </Compile>
     <Compile Include="MDIParent1.Designer.vb">
       <DependentUpon>MDIParent1.vb</DependentUpon>
     </Compile>
@@ -141,20 +136,25 @@
     <Compile Include="SplashScreen1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="tSituazione.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tSituazione.dbml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.vb</DependentUpon>
     </EmbeddedResource>
+    <None Include="tSituazione.dbml.layout">
+      <DependentUpon>tSituazione.dbml</DependentUpon>
+    </None>
     <None Include="tOre.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>tOre.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="My Project\app.manifest" />
-    <None Include="tSituazione.dbml.layout">
-      <DependentUpon>tSituazione.dbml</DependentUpon>
-    </None>
     <None Include="tOre.dbml.layout">
       <DependentUpon>tOre.dbml</DependentUpon>
     </None>
@@ -173,13 +173,13 @@
     <EmbeddedResource Include="SplashScreen1.resx">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="tSituazione.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>tSituazione.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -275,6 +275,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PATCH.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

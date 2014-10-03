@@ -1,0 +1,21 @@
+﻿Ad ogni rigenerazione del tSituazione.dbml occorre:
+
+1) Nella classe tSituazione aggiungere subito dopo    Private _IsStringBefore As System.Nullable(Of Boolean) :
+
+Private _HasException As Boolean
+
+***************************************
+
+2) Nella classe tSituazione aggiungere subito prima    Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+
+Public Property HasException As Boolean
+
+        Get
+            Return _HasException
+        End Get
+        Set(value As Boolean)
+            _HasException = value
+        End Set
+    End Property
+
+============== FINE PATCH ========================

@@ -40,7 +40,7 @@ Partial Public Class tSituazioneDataContext
   #End Region
 	
 	Public Sub New()
-		MyBase.New(Global.COSiFa.My.MySettings.Default.SituationConnectionString, mappingSource)
+		MyBase.New(Global.COSiFa.My.MySettings.Default.SituationConnectionString1, mappingSource)
 		OnCreated
 	End Sub
 	
@@ -97,7 +97,7 @@ Partial Public Class tSituazione
 	
 	Private _Nazione As String
 	
-	Private _Posizione As Integer
+	Private _Posizione As String
 	
 	Private _CodiceMateriale As String
 	
@@ -156,6 +156,7 @@ Partial Public Class tSituazione
     Private _IsStringBefore As System.Nullable(Of Boolean)
 
     Private _HasException As Boolean
+
 	
     #Region "Definizioni metodo Extensibility"
     Partial Private Sub OnLoaded()
@@ -204,7 +205,7 @@ Partial Public Class tSituazione
     End Sub
     Partial Private Sub OnNazioneChanged()
     End Sub
-    Partial Private Sub OnPosizioneChanging(value As Integer)
+    Partial Private Sub OnPosizioneChanging(value As String)
     End Sub
     Partial Private Sub OnPosizioneChanged()
     End Sub
@@ -361,7 +362,7 @@ Partial Public Class tSituazione
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Produttore", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Produttore", DbType:="VarChar(50)")>  _
 	Public Property Produttore() As String
 		Get
 			Return Me._Produttore
@@ -489,14 +490,13 @@ Partial Public Class tSituazione
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Posizione", DbType:="Int NOT NULL")>  _
-	Public Property Posizione() As Integer
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Posizione", DbType:="VarChar(10) NOT NULL", CanBeNull:=false)>  _
+	Public Property Posizione() As String
 		Get
 			Return Me._Posizione
 		End Get
 		Set
-			If ((Me._Posizione = value)  _
-						= false) Then
+			If (String.Equals(Me._Posizione, value) = false) Then
 				Me.OnPosizioneChanging(value)
 				Me.SendPropertyChanging
 				Me._Posizione = value
@@ -635,7 +635,7 @@ Partial Public Class tSituazione
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RifProgramma", DbType:="VarChar(7) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RifProgramma", DbType:="VarChar(15) NOT NULL", CanBeNull:=false)>  _
 	Public Property RifProgramma() As String
 		Get
 			Return Me._RifProgramma
@@ -953,9 +953,10 @@ Partial Public Class tSituazione
 				Me.OnIsStringBeforeChanged
 			End If
 		End Set
-    End Property
+	End Property
 
     Public Property HasException As Boolean
+
         Get
             Return _HasException
         End Get
@@ -963,6 +964,7 @@ Partial Public Class tSituazione
             _HasException = value
         End Set
     End Property
+
 
 	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
 	

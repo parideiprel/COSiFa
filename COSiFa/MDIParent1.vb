@@ -1,19 +1,41 @@
 ﻿Imports System.Windows.Forms
 Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
+Imports System.IO
+Imports COSiFa.My
 
 Public Class MDIParent1
 
     Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click
         'Me.Close()
+        Dim txt As Byte() = New System.Text.UTF8Encoding(True).GetBytes("=== Arresto Programma " + My.Application.Info.ProductName + " === " + Now.ToString() + vbCrLf)
+        gnappo.Write(txt, 0, txt.Length)
+        gnappo.Close()
+        gnappo = Nothing
 
         End
     End Sub
 
     Shared userlevel As Integer = 0
     Dim cn As SqlClient.SqlConnection = New SqlClient.SqlConnection(My.Resources.connectionString)
+    Dim gnappo As FileStream
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            gnappo = System.IO.File.Open("c:\temp\LOG.txt", FileMode.Append, FileAccess.Write, FileShare.Read)
+            Dim txt As Byte() = New System.Text.UTF8Encoding(True).GetBytes("=== Avvio Programma " + My.Application.Info.ProductName + " === " + Now.ToString() + vbCrLf)
+            gnappo.Write(txt, 0, txt.Length)
+        Catch ex As Exception
+            MsgBox("ERRORE - Impossibile aprire/scrivere file di Log LOG.txt" + vbCrLf + vbCrLf + "-----------------------------" + vbCrLf + ex.Message, vbOKOnly + vbExclamation)
+        End Try
+
+        'Try
+        '    Dim txt As Byte() = New System.Text.UTF8Encoding(True).GetBytes("=== Avvio Programma " + My.Application.Info.ProductName + " === " + Now.ToString() + vbCrLf)
+        '    gnappo.Write(txt, 0, txt.Length)
+        'Catch ex As Exception
+        '    MsgBox("ERRORE - Impossibile Scrivere file di Log LOG.txt" + vbCrLf + vbCrLf + "-----------------------------" + vbCrLf + ex.Message, vbOKOnly + vbExclamation)
+        'End Try
 
         'Inserire qui le attività da fare al caricamento
         'tipo lettura dei diritti utente e abilitazione varie funzioni
@@ -145,104 +167,104 @@ Public Class MDIParent1
         ' TODO: Occorre gestire la situazione di più dati nella stessa cella (+ q.e. identici con matr. diverse - es. q.tà=4...)
 
         Dim riga As Integer = 0
-        '       For pippo As Integer = 1 To iBottomCell
-        'riga = pippo
-        riga = 431  'riga 71 corrisponde alla cella 72 di excel
+        For pippo As Integer = 1 To iBottomCell
+            riga = pippo
+            'riga = 71 '431 5 matricole  'riga 71 corrisponde alla cella 72 di excel
 
-        xls.XAnno = xlRange.Cells(riga, 1).value
-        xls.XProduttore = xlRange.Cells(riga, 2).value
-        xls.XEquipment = xlRange.Cells(riga, 3).value
-        xls.XSettoreCommerciale = xlRange.Cells(riga, 4).value
-        xls.XCanaleDistributivo = xlRange.Cells(riga, 5).value
-        xls.XOdV = xlRange.Cells(riga, 6).value
-        xls.XCodiceCliente = xlRange.Cells(riga, 7).value
-        xls.XAnagraficaCliente = xlRange.Cells(riga, 8).value
-        xls.XNazione = xlRange.Cells(riga, 9).value
-        xls.XPosizione = xlRange.Cells(riga, 10).value
-        xls.XCodiceMateriale = xlRange.Cells(riga, 11).value
-        xls.XAnagraficaMateriale = xlRange.Cells(riga, 12).value
-        xls.XSituazioneSpedizione = xlRange.Cells(riga, 13).value
-        xls.XDataSpedizione = xlRange.Cells(riga, 14).value
-        xls.XDtSped1 = xlRange.Cells(riga, 15).value
-        xls.XDtSped2 = xlRange.Cells(riga, 16).value
-        xls.XAutore = xlRange.Cells(riga, 17).value
-        xls.XNote = xlRange.Cells(riga, 18).value
-        xls.XRiferimentoProgramma = xlRange.Cells(riga, 19).value
-        xls.XDataUscita = xlRange.Cells(riga, 20).value
-        xls.XDataConsegnaPrevista = xlRange.Cells(riga, 21).value
-        xls.XStudio = xlRange.Cells(riga, 22).value
-        xls.XCdC = xlRange.Cells(riga, 23).value
-        xls.XOdA = xlRange.Cells(riga, 24).value
-        xls.XPosizioneOdA = xlRange.Cells(riga, 25).value
-        xls.XCatalogo = xlRange.Cells(riga, 26).value
-        xls.XDataArchiviazione = xlRange.Cells(riga, 27).value
-        xls.XNumeroArchiviazione = xlRange.Cells(riga, 28).value
-        xls.XNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
-        xls.XOreSap = xlRange.Cells(riga, 30).value
-        xls.XOreDisegno = xlRange.Cells(riga, 31).value
-        xls.XCostoFatturato = xlRange.Cells(riga, 32).value
-        xls.XCostoPreventivato = xlRange.Cells(riga, 33).value
-        xls.XScostamento = xlRange.Cells(riga, 34).value
-        xls.XNoteAgg = xlRange.Cells(riga, 35).value
+            xls.XAnno = xlRange.Cells(riga, 1).value
+            xls.XProduttore = xlRange.Cells(riga, 2).value
+            xls.XEquipment = xlRange.Cells(riga, 3).value
+            xls.XSettoreCommerciale = xlRange.Cells(riga, 4).value
+            xls.XCanaleDistributivo = xlRange.Cells(riga, 5).value
+            xls.XOdV = xlRange.Cells(riga, 6).value
+            xls.XCodiceCliente = xlRange.Cells(riga, 7).value
+            xls.XAnagraficaCliente = xlRange.Cells(riga, 8).value
+            xls.XNazione = xlRange.Cells(riga, 9).value
+            xls.XPosizione = xlRange.Cells(riga, 10).value
+            xls.XCodiceMateriale = xlRange.Cells(riga, 11).value
+            xls.XAnagraficaMateriale = xlRange.Cells(riga, 12).value
+            xls.XSituazioneSpedizione = xlRange.Cells(riga, 13).value
+            xls.XDataSpedizione = xlRange.Cells(riga, 14).value
+            xls.XDtSped1 = xlRange.Cells(riga, 15).value
+            xls.XDtSped2 = xlRange.Cells(riga, 16).value
+            xls.XAutore = xlRange.Cells(riga, 17).value
+            xls.XNote = xlRange.Cells(riga, 18).value
+            xls.XRiferimentoProgramma = xlRange.Cells(riga, 19).value
+            xls.XDataUscita = xlRange.Cells(riga, 20).value
+            xls.XDataConsegnaPrevista = xlRange.Cells(riga, 21).value
+            xls.XStudio = xlRange.Cells(riga, 22).value
+            xls.XCdC = xlRange.Cells(riga, 23).value
+            xls.XOdA = xlRange.Cells(riga, 24).value
+            xls.XPosizioneOdA = xlRange.Cells(riga, 25).value
+            xls.XCatalogo = xlRange.Cells(riga, 26).value
+            xls.XDataArchiviazione = xlRange.Cells(riga, 27).value
+            xls.XNumeroArchiviazione = xlRange.Cells(riga, 28).value
+            xls.XNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
+            xls.XOreSap = xlRange.Cells(riga, 30).value
+            xls.XOreDisegno = xlRange.Cells(riga, 31).value
+            xls.XCostoFatturato = xlRange.Cells(riga, 32).value
+            xls.XCostoPreventivato = xlRange.Cells(riga, 33).value
+            xls.XScostamento = xlRange.Cells(riga, 34).value
+            xls.XNoteAgg = xlRange.Cells(riga, 35).value
 
-        '***** Verifica se matricola è di un ATM ******
-        For Each l As String In lstAtmString
-            If xls.XEquipment.ToLower.Contains(l) Then
-                xls.XIsAtm = True
-                Exit For
-            Else
-                xls.XIsAtm = False
-            End If
-        Next
-
-        If xls.XIsAtm Then
-            Dim resultString As String
-            Try
-                Dim regexObj As New Regex("[0-9]{8}")
-                resultString = regexObj.Match(xls.XEquipment).Value
-                Select Case InStr(xls.XEquipment, resultString)
-                    Case Is = 0
-                        'il numero equipment è all'inizio
-                        xls.XAtmString = xls.XEquipment.Substring(8, xls.XEquipment.Length - 1)
-                        xls.XEquipment = resultString
-                        xls.XIsStringBefore = False
-                    Case Is > 0
-                        'il numero è dopo l'inizio stringa
-                        xls.XAtmString = xls.XEquipment.Substring(0, xls.XEquipment.Length - 8)
-                        xls.XEquipment = resultString
-                        xls.XIsStringBefore = True
-                End Select
-            Catch ex As ArgumentException
-                'Syntax error in the regular expression
-                MsgBox("Stringa non trovata")
-            End Try
-        End If
-
-        '******** Verifico se matricola è una lista di matricole per produz. di + q.e. identici *********
-        If xls.XEquipment.Contains(vbLf) Then
-            bIsAList = True
-        Else
-            bIsAList = False
-        End If
-
-        If bIsAList Then
-            indice = 0
-            Dim lstEqp As New List(Of String)(xls.XEquipment.Split(vbLf))
-            For Each a As String In lstEqp
-                ' per ogni stringa di matricola reitero la scrittura sul DB
-
-                xls.XEquipment = a
-                ScriviDb(tSitu, xls, lstEqp.IndexOf(a), lstEqp.Count)
-                indice += 1
-
+            '***** Verifica se matricola è di un ATM ******
+            For Each l As String In lstAtmString
+                If xls.XEquipment.ToLower.Contains(l) Then
+                    xls.XIsAtm = True
+                    Exit For
+                Else
+                    xls.XIsAtm = False
+                End If
             Next
 
-        End If
+            If xls.XIsAtm Then
+                Dim resultString As String
+                Try
+                    Dim regexObj As New Regex("[0-9]{8}")
+                    resultString = regexObj.Match(xls.XEquipment).Value
+                    Select Case InStr(xls.XEquipment, resultString)
+                        Case Is = 0
+                            'il numero equipment è all'inizio
+                            xls.XAtmString = xls.XEquipment.Substring(8, xls.XEquipment.Length - 1)
+                            xls.XEquipment = resultString
+                            xls.XIsStringBefore = False
+                        Case Is > 0
+                            'il numero è dopo l'inizio stringa
+                            xls.XAtmString = xls.XEquipment.Substring(0, xls.XEquipment.Length - 8)
+                            xls.XEquipment = resultString
+                            xls.XIsStringBefore = True
+                    End Select
+                Catch ex As ArgumentException
+                    'Syntax error in the regular expression
+                    MsgBox("Stringa non trovata")
+                End Try
+            End If
 
-        If bIsAList = False Then
-            ScriviDb(tSitu, xls, 0, 0)
-        End If
+            '******** Verifico se matricola è una lista di matricole per produz. di + q.e. identici *********
+            If xls.XEquipment.Contains(vbLf) Then
+                bIsAList = True
+            Else
+                bIsAList = False
+            End If
 
+            If bIsAList Then
+                indice = 0
+                Dim lstEqp As New List(Of String)(xls.XEquipment.Split(vbLf))
+                For Each a As String In lstEqp
+                    ' per ogni stringa di matricola reitero la scrittura sul DB
+
+                    xls.XEquipment = a
+                    ScriviDb(tSitu, xls, lstEqp.IndexOf(a), lstEqp.Count)
+                    indice += 1
+
+                Next
+
+            End If
+
+            If bIsAList = False Then
+                ScriviDb(tSitu, xls, 0, 0)
+            End If
+        Next pippo
         xlFile.Close(False) 'chiude senza salvare
         xlRange = Nothing
         xlSheet = Nothing

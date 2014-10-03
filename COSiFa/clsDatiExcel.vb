@@ -8,7 +8,7 @@
     Private _xCodiceCliente As String
     Private _xAnagraficaCliente As String
     Private _xNazione As String
-    Private _xPosizione As Integer
+    Private _xPosizione As String
     Private _xCodiceMateriale As String
     Private _xAnagraficaMateriale As String
     Private _xSituazioneSpedizione As String
@@ -23,7 +23,7 @@
     Private _xStudio As String
     Private _xCdC As String
     Private _xOdA As String
-    Private _xPosizioneOdA As Integer
+    Private _xPosizioneOdA As String
     Private _xCatalogo As String
     Private _xDataArchiviazione As Date
     Private _xNumeroArchiviazione As String
@@ -120,11 +120,11 @@
         End Set
     End Property
 
-    Public Property XPosizione As Integer
+    Public Property XPosizione As String
         Get
             Return _xPosizione
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _xPosizione = value
         End Set
     End Property
@@ -255,11 +255,11 @@
         End Set
     End Property
 
-    Public Property XPosizioneOdA As Integer
+    Public Property XPosizioneOdA As String
         Get
             Return _xPosizioneOdA
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _xPosizioneOdA = value
         End Set
     End Property

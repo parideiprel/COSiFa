@@ -64,6 +64,17 @@ Namespace My
                 Return CType(Me("SituationConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=ipr-sql01;Initial Catalog=Situation;User ID=usercataloghi;Password=us"& _ 
+            "ercataloghi")>  _
+        Public ReadOnly Property SituationConnectionString1() As String
+            Get
+                Return CType(Me("SituationConnectionString1"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

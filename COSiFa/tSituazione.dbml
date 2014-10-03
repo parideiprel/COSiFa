@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Situation" Class="tSituazioneDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=IPR-SQL01;Initial Catalog=Situation;Persist Security Info=True;User ID=usercataloghi" SettingsObjectName="COSiFa.My.MySettings" SettingsPropertyName="SituationConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ipr-sql01;Initial Catalog=Situation;User ID=usercataloghi" SettingsObjectName="COSiFa.My.MySettings" SettingsPropertyName="SituationConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tSituazione" Member="tSituazione">
     <Type Name="tSituazione">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Anno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Produttore" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Produttore" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Equipment" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
       <Column Name="SettoreCommerciale" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
       <Column Name="CanaleDistributivo" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
@@ -12,7 +12,7 @@
       <Column Name="CodiceCliente" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="AnagraficaCliente" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="Nazione" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Posizione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Posizione" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="CodiceMateriale" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="AnagraficaMateriale" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="SituazioneSpedizione" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
@@ -21,7 +21,7 @@
       <Column Name="DtSped2" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Autore" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
       <Column Name="Note" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="RifProgramma" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="RifProgramma" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="DataUscita" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="DataConsegnaPrevista" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Studio" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
