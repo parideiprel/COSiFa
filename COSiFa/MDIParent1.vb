@@ -129,6 +129,7 @@ Public Class MDIParent1
         Dim xls As New ClsDatiExcel
         Dim iBottomCell As Integer
         Dim indice As Integer
+        Dim colonna As Integer = 0
 
         Dim tSitu As New tSituazioneDataContext()
         'Dim tSit As New tSituazione
@@ -164,40 +165,113 @@ Public Class MDIParent1
         xlRange = xlSheet.Range("A2")
         ret = xlRange.Select()
 
-        ' TODO: Occorre gestire la situazione di più dati nella stessa cella (+ q.e. identici con matr. diverse - es. q.tà=4...)
+        '*** visualizzazione form con progressbar ***
+        Progress.Show()
+        Progress.ProgressBar1.Minimum = 0
+        Progress.ProgressBar1.Maximum = iBottomCell - 1
+
 
         Dim riga As Integer = 0
-        For pippo As Integer = 1 To iBottomCell
+        For pippo As Integer = 1 To iBottomCell - 1
             riga = pippo
+            Progress.ProgressBar1.Value = pippo
             'riga = 71 '431 5 matricole  'riga 71 corrisponde alla cella 72 di excel
 
-            xls.XAnno = xlRange.Cells(riga, 1).value
+            If xlRange.Cells(riga, 1).value Is Nothing Then
+                xls.XAnno = 9999
+            Else
+                xls.XAnno = xlRange.Cells(riga, 1).value
+            End If
+
             xls.XProduttore = xlRange.Cells(riga, 2).value
-            xls.XEquipment = xlRange.Cells(riga, 3).value
-            xls.XSettoreCommerciale = xlRange.Cells(riga, 4).value
-            xls.XCanaleDistributivo = xlRange.Cells(riga, 5).value
-            xls.XOdV = xlRange.Cells(riga, 6).value
-            xls.XCodiceCliente = xlRange.Cells(riga, 7).value
-            xls.XAnagraficaCliente = xlRange.Cells(riga, 8).value
-            xls.XNazione = xlRange.Cells(riga, 9).value
-            xls.XPosizione = xlRange.Cells(riga, 10).value
-            xls.XCodiceMateriale = xlRange.Cells(riga, 11).value
-            xls.XAnagraficaMateriale = xlRange.Cells(riga, 12).value
+
+            If xlRange.Cells(riga, 3).value Is Nothing Then
+                xls.XEquipment = "99999999"
+            Else
+                xls.XEquipment = xlRange.Cells(riga, 3).value
+            End If
+
+            If xlRange.Cells(riga, 4).value Is Nothing Then
+                xls.XSettoreCommerciale = "CERA"
+            Else
+                xls.XSettoreCommerciale = xlRange.Cells(riga, 4).value
+            End If
+
+
+            If xlRange.Cells(riga, 5).value Is Nothing Then
+                xls.XCanaleDistributivo = "MP"
+            Else
+                xls.XCanaleDistributivo = xlRange.Cells(riga, 5).value
+            End If
+
+            If xlRange.Cells(riga, 6).value Is Nothing Then
+                xls.XOdV = "0000000000"
+            Else
+                xls.XOdV = xlRange.Cells(riga, 6).value
+            End If
+
+            If xlRange.Cells(riga, 7).value Is Nothing Then
+                xls.XCodiceCliente = "000000"
+            Else
+                xls.XCodiceCliente = xlRange.Cells(riga, 7).value
+            End If
+
+            If xlRange.Cells(riga, 8).value Is Nothing Then
+                xls.XAnagraficaCliente = "+++ CAMPO NON COMPILATO +++"
+            Else
+                xls.XAnagraficaCliente = xlRange.Cells(riga, 8).value
+            End If
+
+            If xlRange.Cells(riga, 9).value Is Nothing Then
+                xls.XNazione = "XX"
+            Else
+                xls.XNazione = xlRange.Cells(riga, 9).value
+            End If
+
+            If xlRange.Cells(riga, 10).value Is Nothing Then
+                xls.XPosizione = "0"
+            Else
+                xls.XPosizione = xlRange.Cells(riga, 10).value
+            End If
+
+            If xlRange.Cells(riga, 11).value Is Nothing Then
+                xls.XCodiceMateriale = "XXXXXXXXXX"
+            Else
+                xls.XCodiceMateriale = xlRange.Cells(riga, 11).value
+            End If
+
+            If xlRange.Cells(riga, 12).value Is Nothing Then
+                xls.XAnagraficaMateriale = "XXXXXXXXXX"
+            Else
+                xls.XAnagraficaMateriale = xlRange.Cells(riga, 12).value
+            End If
             xls.XSituazioneSpedizione = xlRange.Cells(riga, 13).value
-            xls.XDataSpedizione = xlRange.Cells(riga, 14).value
-            xls.XDtSped1 = xlRange.Cells(riga, 15).value
-            xls.XDtSped2 = xlRange.Cells(riga, 16).value
+
+            xls.XDataSpedizione = ControllaData(xlRange, riga, 14)
+
+            xls.XDtSped1 = ControllaData(xlRange, riga, 15)
+            xls.XDtSped2 = ControllaData(xlRange, riga, 16)
+
             xls.XAutore = xlRange.Cells(riga, 17).value
             xls.XNote = xlRange.Cells(riga, 18).value
-            xls.XRiferimentoProgramma = xlRange.Cells(riga, 19).value
-            xls.XDataUscita = xlRange.Cells(riga, 20).value
-            xls.XDataConsegnaPrevista = xlRange.Cells(riga, 21).value
+
+            If xlRange.Cells(riga, 19).value Is Nothing Then
+                xls.XRiferimentoProgramma = "9999999999"
+            Else
+                xls.XRiferimentoProgramma = xlRange.Cells(riga, 19).value
+            End If
+
+            xls.XDataUscita = ControllaData(xlRange, riga, 20)
+            xls.XDataConsegnaPrevista = ControllaData(xlRange, riga, 21)
+
             xls.XStudio = xlRange.Cells(riga, 22).value
             xls.XCdC = xlRange.Cells(riga, 23).value
             xls.XOdA = xlRange.Cells(riga, 24).value
             xls.XPosizioneOdA = xlRange.Cells(riga, 25).value
             xls.XCatalogo = xlRange.Cells(riga, 26).value
-            xls.XDataArchiviazione = xlRange.Cells(riga, 27).value
+
+            xls.XDataArchiviazione = ControllaData(xlRange, riga, 27)
+
             xls.XNumeroArchiviazione = xlRange.Cells(riga, 28).value
             xls.XNumeroArchiviazioneTavole = xlRange.Cells(riga, 29).value
             xls.XOreSap = xlRange.Cells(riga, 30).value
@@ -275,6 +349,7 @@ Public Class MDIParent1
         For Each item In proc
             item.Kill()
         Next
+        Progress.Hide()
         MsgBox("Importazione Situazione Terminata!")
     End Sub
 
