@@ -327,9 +327,9 @@ Module MyFunctions
         '-----------------------------------------------------------------
         Try
             If xls.xOreSap = 0 Then
-                tSit.OreSAP = 0
+                tSit.OreSAP = 0D
             Else
-                tSit.OreSAP = xls.xOreSap
+                tSit.OreSAP = Val(xls.xOreSap)
                 'If Len(tSit.OreSAP) <> Len(xls.xOreSap) Then
                 '    WriteToLog("c:\temp\import.txt", "ERRORE Dimensione [OreSAP] - tSit=" + Len(tSit.OreSAP).ToString() + " / xls=" + Len(xls.xOreSap).ToString())
                 'End If
@@ -342,9 +342,9 @@ Module MyFunctions
         '-----------------------------------------------------------------
         Try
             If xls.xOreDisegno = 0 Then
-                tSit.OreDisegno = 0
+                tSit.OreDisegno = 0D
             Else
-                tSit.OreDisegno = xls.xOreDisegno
+                tSit.OreDisegno = Val(xls.xOreDisegno)
                 'If Len(tSit.OreDisegno) <> Len(xls.xOreDisegno) Then
                 '    WriteToLog("c:\temp\import.txt", "ERRORE Dimensione [OreDisegno] - tSit=" + Len(tSit.OreDisegno).ToString() + " / xls=" + Len(xls.xOreDisegno).ToString())
                 'End If
@@ -356,9 +356,9 @@ Module MyFunctions
         '-----------------------------------------------------------------
         Try
             If xls.xCostoFatturato = 0 Then
-                tSit.CostoFatturato = 0
+                tSit.CostoFatturato = 0D
             Else
-                tSit.CostoFatturato = xls.xCostoFatturato
+                tSit.CostoFatturato = Val(xls.xCostoFatturato)
                 'If Len(tSit.CostoFatturato) <> Len(xls.xCostoFatturato) Then
                 '    WriteToLog("c:\temp\import.txt", "ERRORE Dimensione [CostoFatturato] - tSit=" + Len(tSit.CostoFatturato).ToString() + " / xls=" + Len(xls.xCostoFatturato).ToString())
                 'End If
@@ -370,9 +370,9 @@ Module MyFunctions
         '-----------------------------------------------------------------
         Try
             If xls.xCostoPreventivato = 0 Then
-                tSit.CostoPrevisto = 0
+                tSit.CostoPrevisto = 0D
             Else
-                tSit.CostoPrevisto = xls.xCostoPreventivato
+                tSit.CostoPrevisto = Val(xls.xCostoPreventivato)
                 'If Len(tSit.CostoPrevisto) <> Len(xls.xCostoPreventivato) Then
                 '    WriteToLog("c:\temp\import.txt", "ERRORE Dimensione [CostoPrevisto] - tSit=" + Len(tSit.CostoPrevisto).ToString() + " / xls=" + Len(xls.xCostoPreventivato).ToString())
                 'End If
@@ -384,9 +384,9 @@ Module MyFunctions
         '-----------------------------------------------------------------
         Try
             If xls.xScostamento = 0 Then
-                tSit.Scostamento = 0
+                tSit.Scostamento = 0D
             Else
-                tSit.Scostamento = xls.xScostamento
+                tSit.Scostamento = Val(xls.xScostamento)
                 'If Len(tSit.Scostamento) <> Len(xls.xScostamento) Then
                 '    WriteToLog("c:\temp\import.txt", "ERRORE Dimensione [Scostamento] - tSit=" + Len(tSit.Scostamento).ToString() + " / xls=" + Len(xls.xScostamento).ToString())
                 'End If

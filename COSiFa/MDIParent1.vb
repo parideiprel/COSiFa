@@ -20,7 +20,7 @@ Public Class MDIParent1
     Dim cn As SqlClient.SqlConnection = New SqlClient.SqlConnection(My.Resources.connectionString)
     Dim gnappo As FileStream
 
-    Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    <System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Controllare l'eventuale vulnerabilità di sicurezza delle query SQL")> Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
             gnappo = System.IO.File.Open("c:\temp\LOG.txt", FileMode.Append, FileAccess.Write, FileShare.Read)
@@ -169,12 +169,14 @@ Public Class MDIParent1
         Progress.Show()
         Progress.ProgressBar1.Minimum = 0
         Progress.ProgressBar1.Maximum = iBottomCell - 1
+        Progress.Label2.Text = (iBottomCell - 1).ToString()
 
 
         Dim riga As Integer = 0
         For pippo As Integer = 1 To iBottomCell - 1
             riga = pippo
             Progress.ProgressBar1.Value = pippo
+            Progress.Label3.Text = pippo.ToString()
             'riga = 71 '431 5 matricole  'riga 71 corrisponde alla cella 72 di excel
 
             If xlRange.Cells(riga, 1).value Is Nothing Then
